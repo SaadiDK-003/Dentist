@@ -24,101 +24,54 @@ if (isLoggedin() === false) {
         <section class="reservation">
             <div class="container my-5">
                 <div class="row">
-                    <div class="col-12 text-center">
-                        <h1>Appointment</h1>
-                        <span class="showResponse w-50 mx-auto"></span>
-                    </div>
-                    <div class="col-12 col-md-8 mx-auto">
-                        <form id="reservation-form" method="post">
+                    <form id="reservation-form" method="post">
+                        <div class="col-12 text-center">
+                            <h1>Appointment</h1>
+                            <span class="showResponse w-50 mx-auto"></span>
+                        </div>
+                        <div class="col-12 col-md-4 mx-auto">
                             <div class="row">
-                                <div class="col-12 col-md-6 mb-3">
+                                <div class="col-12 mb-3">
                                     <div class="form-group">
-                                        <label for="cafe">Cafe</label>
-                                        <select name="cafe" id="cafe" class="form-select" required>
-                                            <option value="" selected hidden>Select Cafe</option>
+                                        <label for="doctor_id">Doctor</label>
+                                        <select name="doctor_id" id="doctor_id" class="form-select" required>
+                                            <option value="" selected hidden>Select Doctor</option>
                                             <?php
-                                            $c_list = $db->query("CALL `select_all_cafe`()");
-                                            while ($cafe_list = mysqli_fetch_object($c_list)) : ?>
-                                                <option value="<?= $cafe_list->cafeID ?>"><?= $cafe_list->store_name ?></option>
+                                            $doctor_list = $db->query("CALL `select_all_doctors`()");
+                                            while ($doc_list = mysqli_fetch_object($doctor_list)) : ?>
+                                                <option value="<?= $doc_list->DocID ?>"><?= $doc_list->DocName ?></option>
                                             <?php endwhile;
-                                            $c_list->close();
+                                            $doctor_list->close();
                                             $db->next_result();
                                             ?>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 mb-3">
+                                <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="start-time">Date & Time <span class="text-danger">*</span></label>
                                         <input type="datetime-local" name="start_time" id="start-time" class="form-control" required disabled>
                                     </div>
                                 </div>
-                                <div class="col-12 col-md-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="total-members">Total members <span class="text-danger">*</span></label>
-                                        <select name="total_members" id="total-members" class="form-select" required>
-                                            <option value="" selected hidden>Select Members</option>
-                                            <option value="1">Single Person</option>
-                                            <option value="2">Two Members</option>
-                                            <option value="3">Three Members</option>
-                                            <option value="4">More Three Members</option>
-                                            <!-- <option value="4">Four Members</option>
-                                            <option value="5">Five Members</option>
-                                            <option value="6">Six Members</option> -->
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="total-tables">How many tables <span class="text-danger">*</span></label>
-                                        <select name="total_tables" id="total-tables" class="form-select" required>
-                                            <option value="" selected hidden>Select Tables</option>
-                                            <option value="1">One Table</option>
-                                            <option value="2">Two Tables</option>
-                                            <option value="3">Three Tables</option>
-                                            <option value="4">More Three Tables</option>
-                                            <!-- <option value="4">Four Tables</option>
-                                            <option value="5">Five Tables</option> -->
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="table-location">Table Location <span class="text-danger">*</span></label>
-                                        <select name="table_location" id="table-location" class="form-select" required>
-                                            <option value="" selected hidden>Select Table Location</option>
-                                            <option value="inside">Inside</option>
-                                            <option value="outside">Outside</option>
-                                            <option value="near-window">Near Window</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-md-6 mb-3">
-                                    <div class="form-group">
-                                        <label for="events">Events</label>
-                                        <select name="events" id="events" class="form-select">
-                                            <option value="" selected hidden>Select Event</option>
-                                            <option value="">No Event</option>
-                                            <option value="birthday">Birthday</option>
-                                            <option value="anniversary">Anniversary</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-12 mb-3 cafe_info d-none">
-                                    <div class="render_cafe_info"></div>
-                                </div>
-                                <div class="col-12 col-md-6 mb-3">
+                                <div class="col-12 mb-3">
                                     <h6 class="text-secondary">Fields with <span class="text-danger">*</span> are mandatory</h6>
                                 </div>
-                                <div class="col-12 col-md-6 mb-3">
+                                <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <input type="hidden" name="end_time" id="end" value="">
                                         <button type="submit" id="submit" class="d-block mx-auto mx-md-0 ms-md-auto w-25 btn btn-primary">Submit</button>
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                        <div class="col-12 mb-3 cafe_info d-none">
+                            <div class="row">
+                                <div class="col-12 col-md-10 mx-auto">
+                                    <div class="render_cafe_info"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -151,28 +104,28 @@ if (isLoggedin() === false) {
                 var storeCloseMinutes = parseInt(storeCloseTime.split(':')[0]) * 60 + parseInt(storeCloseTime.split(':')[1]);
 
                 return selectedTime >= storeOpenMinutes && selectedTime <= storeCloseMinutes;
-            }, "Please select a time within the store's opening hours.");
+            }, "Please select a time within the clinic's opening hours.");
 
-            $("#cafe").on('change', function(e) {
+            $("#doctor_id").on('change', function(e) {
                 e.preventDefault();
                 $("#start-time").removeAttr('disabled');
-                let cafeID = $(this).val();
+                let docID = $(this).val();
                 $.ajax({
                     url: 'ajax/cafe_info.php',
                     method: 'POST',
                     data: {
-                        cafeID: cafeID
+                        docID: docID
                     },
                     success: function(res) {
                         $(".cafe_info").removeClass("d-none");
                         $(".render_cafe_info").html(res);
-
+                        let minutes_ahead = 0;
                         const date = new Date();
                         const year = date.getFullYear();
                         const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are 0-based
                         const day = String(date.getDate()).padStart(2, '0');
                         const hours = String(date.getHours()).padStart(2, '0');
-                        const minutes = String(date.getMinutes() + 3).padStart(2, '0');
+                        const minutes = String(date.getMinutes() + minutes_ahead).padStart(2, '0');
                         const formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`;
 
 
@@ -199,7 +152,7 @@ if (isLoggedin() === false) {
                 messages: {
                     "start_time": {
                         futureDateTime: "Please select a current or future date and time.",
-                        withinStoreHours: "Please select a time within the store's opening hours."
+                        withinStoreHours: "Please select a time within the clinic's opening hours."
                     }
                 },
                 submitHandler: function(form) {

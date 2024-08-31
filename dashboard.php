@@ -28,37 +28,29 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                     </div>
                     <!-- Reservation Table Start -->
                     <div class="col-12">
-                        <h3>Reservation Table</h3>
+                        <h3>Appointment Table</h3>
                     </div>
                     <div class="col-12">
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Start Time</th>
-                                    <th>Total Members</th>
-                                    <th>Total Tables</th>
-                                    <th>Table Location</th>
-                                    <th>Events</th>
+                                    <th>Visiting Time</th>
                                     <th>Status</th>
-                                    <th>Cafe Info</th>
+                                    <th>Doctor Info</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 $date = '';
-                                $getR_Q = $db->query("CALL `get_reservation_for_visitor`($userID)");
+                                $getR_Q = $db->query("CALL `get_reservation_for_patient`($userID)");
                                 while ($getRow = mysqli_fetch_object($getR_Q)) :
                                     $date = date('d-M-Y h:i A', strtotime($getRow->start_time));
                                 ?>
                                     <tr>
                                         <td><?= $getRow->r_id ?></td>
                                         <td><?= $date ?></td>
-                                        <td><?= $getRow->total_members ?></td>
-                                        <td><?= $getRow->total_tables ?></td>
-                                        <td><?= $getRow->table_location ?></td>
-                                        <td><?= ($getRow->events == '') ? '-' : $getRow->events ?></td>
                                         <td><?php
                                             if ($getRow->r_status == 'pending') : ?>
                                                 <span class="btn btn-warning"><?= $getRow->r_status ?></span>
@@ -68,7 +60,7 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                                                 <span class="btn btn-success"><?= $getRow->r_status ?></span>
                                             <?php endif; ?>
                                         </td>
-                                        <td><a href="#!" class="btn btn-secondary cafe-id" data-id="<?= $getRow->cafe_id ?>">Cafe Info</a></td>
+                                        <td><a href="#!" class="btn btn-secondary cafe-id" data-id="<?= $getRow->doc_id ?>">Doctor Info</a></td>
                                         <td>
                                             <?php if ($getRow->r_status == 'completed') : ?>
                                                 <?php if ($getRow->reviewed == 1) : ?>
@@ -92,13 +84,9 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Start Time</th>
-                                    <th>Total Members</th>
-                                    <th>Total Tables</th>
-                                    <th>Table Location</th>
-                                    <th>Events</th>
+                                    <th>Visiting Time</th>
                                     <th>Status</th>
-                                    <th>Cafe Info</th>
+                                    <th>Doctor Info</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
@@ -107,10 +95,10 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                     <!-- Reservation Table End -->
 
                     <!-- Completed Reservations Start -->
-                    <div class="col-12 mt-5">
+                    <div class="d-none col-12 mt-5">
                         <h3>Completed Reservations</h3>
                     </div>
-                    <div class="col-12">
+                    <div class="d-none col-12">
                         <table id="example" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>

@@ -29,7 +29,7 @@
                     <?php elseif ($userRole == 'doctor') : ?>
                         <a class="btn btn-primary border border-3" href="doctorDashboard.php">Dashboard</a>
                     <?php else : ?>
-                        <a class="btn btn-primary border border-3" href="appointment.php">Reservation</a>
+                        <a class="btn btn-primary border border-3" href="appointment.php">Appointment</a>
                         <a class="btn btn-primary border border-3" href="dashboard.php">Dashboard</a>
                     <?php endif; ?>
                     

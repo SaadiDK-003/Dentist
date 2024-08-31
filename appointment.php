@@ -13,7 +13,7 @@ if (isLoggedin() === false) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= TITLE ?> | Reservation</title>
+    <title><?= TITLE ?> | Appointment</title>
     <?php include './includes/css_links.php'; ?>
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
@@ -25,7 +25,7 @@ if (isLoggedin() === false) {
             <div class="container my-5">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h1>Reservation</h1>
+                        <h1>Appointment</h1>
                         <span class="showResponse w-50 mx-auto"></span>
                     </div>
                     <div class="col-12 col-md-8 mx-auto">

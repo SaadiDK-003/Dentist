@@ -27,11 +27,10 @@
                     <?php if ($userRole == 'admin') : ?>
                         <a class="btn btn-primary border border-3" href="adminDashboard.php">Dashboard</a>
                     <?php elseif ($userRole == 'doctor') : ?>
-                        <a class="btn btn-primary border border-3" href="cafeOwnerDashboard.php">Dashboard</a>
+                        <a class="btn btn-primary border border-3" href="doctorDashboard.php">Dashboard</a>
                     <?php else : ?>
-                         <!--
                         <a class="btn btn-primary border border-3" href="reservation.php">Reservation</a>
-                        <a class="btn btn-primary border border-3" href="dashboard.php">Dashboard</a>-->
+                        <a class="btn btn-primary border border-3" href="dashboard.php">Dashboard</a>
                     <?php endif; ?>
                     
                     <a class="btn btn-danger border border-3" href="logout.php">Logout</a>

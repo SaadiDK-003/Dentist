@@ -127,7 +127,7 @@ function Add_Product($POST, $FILE, $cafe_owner_id, $CafeID)
                         $statusMsg = '<h6 class="alert alert-success w-75 text-center mx-auto">Product has been Added Successfully.</h6>
                         <script>
                             setTimeout(function(){
-                                window.location.href = "./cafeOwnerDashboard.php";
+                                window.location.href = "./doctorDashboard.php";
                             },1800);
                         </script>
                         ';
@@ -209,7 +209,7 @@ function Add_Cafe($POST, $userID)
         $msg = '<h6 class="alert alert-success w-50 text-center mx-auto">Cafe Added Successfully.</h6>
         <script>
             setTimeout(function(){
-                window.location.href = "./cafeOwnerDashboard.php";
+                window.location.href = "./doctorDashboard.php";
             },1800);
         </script>
         ';

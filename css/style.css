@@ -368,6 +368,22 @@ body.cafe_review_page .review-card .ratings.rate-4 i:nth-child(n+1):nth-child(-n
 body.cafe_review_page .review-card .ratings.rate-5 i, body.cafe_reviews_page .review-card .ratings.rate-5 i, body.home_page .review-card .ratings.rate-5 i {
   color: var(--gold);
 }
+body.clinic_page .render_list .box {
+  border: 1px solid #ddd;
+  padding: 15px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 2px #ddd, 0 0 5px 2px #eee;
+}
+body.clinic_page .render_list .box .avatar {
+  width: 100px;
+  height: 100px;
+  margin-inline: auto;
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  border-radius: 50%;
+}
 
 @keyframes text_reval {
   from {

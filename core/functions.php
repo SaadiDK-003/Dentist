@@ -48,6 +48,9 @@ function register($POST)
     $diseases = null;
     $certificate = null;
     $experience = null;
+    $checkin_time = null;
+    $checkout_time = null;
+    $weekend = 'no';
 
     if ($user_type == 'patient') {
         $user_type_ = 'Patient';
@@ -57,6 +60,9 @@ function register($POST)
         $user_type_ = 'Doctor';
         $certificate = $POST['certificate'];
         $experience = $POST['experience'];
+        $checkin_time = $POST['checkin_time'];
+        $checkout_time = $POST['checkout_time'];
+        $weekend = $_POST['weekend_available'];
     }
 
 
@@ -76,7 +82,7 @@ function register($POST)
                     $response = '<h6 class="text-center alert alert-danger">Password & Confirm Password do not match.</h6>';
                 else :
                     $pwd = md5($pwd);
-                    $insertQ = $db->query("INSERT INTO `users` (name,email,password,phone,diseases,certificate,experience,role) VALUES('$name','$email','$pwd','$phone','$diseases','$certificate','$experience','$user_type')");
+                    $insertQ = $db->query("INSERT INTO `users` (name,username,email,password,phone,diseases,certificate,experience,role,clinic_id,checkin_time,checkout_time,weekend_available) VALUES('$name','$username','$email','$pwd','$phone','$diseases','$certificate','$experience','$user_type','1','$checkin_time','$checkout_time','$weekend')");
                     if ($insertQ) {
                         $response = '<h6 class="text-center alert alert-success">' . $user_type_ . ' registered successfully.</h6>
                 <script>

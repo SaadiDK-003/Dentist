@@ -11,29 +11,35 @@ if (isset($_POST['docID'])) :
         <div class="item">
             <div class="text"><span class="d-block fw-bold">Doctor Name</span><?= $doc_data->name ?></div>
             <div class="text"><span class="d-block fw-bold">Doctor Phone</span><?= $doc_data->phone ?></div>
+            <div class="text">
+                <a class="btn btn-primary btn-sm" href="./cafe_review.php?cafe_id=<?= $docID ?>&cafe_name=<?= $doc_data->clinic_name ?>" target="_blank">Reviews</a>
+            </div>
         </div>
         <div class="item">
             <div class="text"><span class="d-block fw-bold">Certificate</span><?= $doc_data->certificate ?></div>
             <div class="text"><span class="d-block fw-bold">Experience</span><?= $doc_data->experience ?></div>
         </div>
         <div class="item">
-            <div class="text"><span class="d-block fw-bold">Clinic Name</span><?= $doc_data->clinic_name ?></div>
-            <div class="text">
-                <a class="btn btn-primary btn-sm" href="./cafe_menu.php?cafe_id=<?= $docID ?>&cafe_name=<?= $doc_data->clinic_name ?>" target="_blank">Clinic</a>
-                <a class="btn btn-primary btn-sm" href="./cafe_review.php?cafe_id=<?= $docID ?>&cafe_name=<?= $doc_data->clinic_name ?>" target="_blank">Reviews</a>
+            <div class="text"><span class="d-block fw-bold">Doctor Timing</span>
+                <?= date('h:i A', strtotime($doc_data->checkin_time)) ?> -
+                <?= date('h:i A', strtotime($doc_data->checkout_time)) ?>
             </div>
-        </div>
-        <div class="item">
-            <div class="text"><span class="d-block fw-bold">Clinic Open</span>
-                <?= date('h:i A', strtotime($doc_data->clinic_open)) ?>
+            <div class="text"><span class="d-block fw-bold">Weekend (Fri & Sat)</span>
+                <?= ($doc_data->weekend_available == 'yes') ? 'Available' : 'Holiday' ?>
             </div>
-            <div class="text"><span class="d-block fw-bold">Clinic Close</span>
-                <?= date('h:i A', strtotime($doc_data->clinic_close)) ?>
-            </div>
-            <input type="hidden" id="store_open_time" value="<?= $doc_data->clinic_open ?>">
-            <input type="hidden" id="store_close_time" value="<?= $doc_data->clinic_close ?>">
+            <input type="hidden" id="store_open_time" value="<?= $doc_data->checkin_time ?>">
+            <input type="hidden" id="store_close_time" value="<?= $doc_data->checkout_time ?>">
             <input type="hidden" name="clinic_id" id="clinic_id" value="<?= $doc_data->c_id ?>">
         </div>
+        <?php if ($doc_data->c_status != 0): ?>
+            <div class="item">
+                <div class="text"><span class="d-block fw-bold">Clinic Name</span><?= $doc_data->clinic_name ?></div>
+                <div class="text"><span class="d-block fw-bold">Clinic Location</span><?= $doc_data->clinic_location ?></div>
+                <div class="text d-none">
+                    <a class="btn btn-primary btn-sm" href="./cafe_menu.php?cafe_id=<?= $docID ?>&cafe_name=<?= $doc_data->clinic_name ?>" target="_blank">Clinic</a>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 
 <?php
@@ -42,8 +48,8 @@ if (isset($_POST['docID'])) :
 endif;
 
 
-if (isset($_POST['cafeID_modal'])) :
-    $docID = $_POST['cafeID_modal'];
+if (isset($_POST['doctorID_modal'])) :
+    $docID = $_POST['doctorID_modal'];
 
     $cafe_Q = $db->query("CALL `get_cafe_info`($docID)");
     $response = array();

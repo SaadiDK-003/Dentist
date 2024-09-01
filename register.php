@@ -160,7 +160,30 @@ if (isLoggedin() === true) {
                                             <input type="text" name="experience" id="experience" class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6 mb-3 d-flex align-items-end">
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="checkin-time">CheckIn Time</label>
+                                            <input type="time" name="checkin_time" id="checkin-time" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="checkout-time">CheckOut Time</label>
+                                            <input type="time" name="checkout_time" id="checkout-time" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="weekend-available">Weekend Available</label>
+                                            <select name="weekend_available" id="weekend-available" class="form-select" required>
+                                                <option value="" selected hidden>Select Availability</option>
+                                                <option value="yes">Yes</option>
+                                                <option value="no">No</option>
+                                            </select>
+                                            <code>Friday & Saturday</code>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-12 mb-3 d-flex align-items-end">
                                         <div class="form-group d-flex gap-2 justify-content-end w-100">
                                             <!--<a href="./login.php" class="btn btn-secondary order-0 order-md-1">login</a>-->
                                             <input type="hidden" name="user_type" value="doctor">

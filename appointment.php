@@ -104,7 +104,7 @@ if (isLoggedin() === false) {
                 var storeCloseMinutes = parseInt(storeCloseTime.split(':')[0]) * 60 + parseInt(storeCloseTime.split(':')[1]);
 
                 return selectedTime >= storeOpenMinutes && selectedTime <= storeCloseMinutes;
-            }, "Please select a time within the clinic's opening hours.");
+            }, "Please select a time within the Doctor's hours.");
 
             $("#doctor_id").on('change', function(e) {
                 e.preventDefault();
@@ -152,7 +152,7 @@ if (isLoggedin() === false) {
                 messages: {
                     "start_time": {
                         futureDateTime: "Please select a current or future date and time.",
-                        withinStoreHours: "Please select a time within the clinic's opening hours."
+                        withinStoreHours: "Please select a time within the Doctor's hours."
                     }
                 },
                 submitHandler: function(form) {

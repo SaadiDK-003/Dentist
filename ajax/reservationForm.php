@@ -10,7 +10,7 @@ if (isset($_POST['start_time']) && !isset($_POST['edit_res_id'])) {
     $res_Q = $db->query("INSERT INTO `reservation` (start_time,end_time,clinic_id,doctor_id,patient_id) VALUES('$s_time','$e_time','$clinic_id','$doctor_id','$userID')");
 
     if ($res_Q) {
-        echo json_encode(["status" => "success", "msg" => "Reservation request has been submitted."]);
+        echo json_encode(["status" => "success", "msg" => "Appointment request has been submitted."]);
     } else {
         echo json_encode(["status" => "danger", "msg" => "Something went wrong."]);
     }
@@ -41,6 +41,6 @@ if (isset($_POST['del_res'])) :
     $del_ = $_POST['del_res'];
     $del_r_Q = $db->query("DELETE FROM `reservation` WHERE `id`='$del_'");
     if ($del_r_Q) {
-        echo json_encode(["msg" => "Reservation has been deleted."]);
+        echo json_encode(["msg" => "Appointment has been deleted."]);
     }
 endif;

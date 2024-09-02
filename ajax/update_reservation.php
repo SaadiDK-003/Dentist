@@ -9,7 +9,7 @@ if (isset($_POST['update_res_id'])) :
     if ($r_status == 'cancel') :
         $cancel_Q = $db->query("DELETE FROM `reservation` WHERE `id`='$update_res_id'");
         if ($cancel_Q) :
-            $msg = '<h6 class="alert alert-danger text-center">Status Deleted.</h6>';
+            $msg = '<h6 class="alert alert-danger text-center">Appointment Deleted.</h6>';
         endif;
     else :
         $upd_r_Q = $db->query("UPDATE `reservation` SET `status`='$r_status' WHERE `id`='$update_res_id'");

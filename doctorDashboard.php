@@ -61,7 +61,7 @@ if (isLoggedin() === false || $userRole == 'patient') {
                                                 <span class="btn btn-success"><?= $getRow->r_status ?></span>
                                             <?php endif; ?>
                                         </td>
-                                        <td><a href="#!" class="btn btn-secondary visitor-id" data-id="<?= $getRow->visitor_id ?>">Visitor Info</a></td>
+                                        <td><a href="#!" class="btn btn-secondary patient-id" data-id="<?= $getRow->patient_id ?>">Patient Info</a></td>
                                         <td><a href="#!" data-id="<?= $getRow->r_id ?>" class="btn btn-primary btn-sm update-info">Update</a></td>
                                     </tr>
                                 <?php endwhile;
@@ -151,7 +151,7 @@ if (isLoggedin() === false || $userRole == 'patient') {
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="visitorInfoModalLabel">Visitor Info</h5>
+                    <h5 class="modal-title" id="visitorInfoModalLabel">Patient Info</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -190,7 +190,7 @@ if (isLoggedin() === false || $userRole == 'patient') {
         <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="updateReservationLabel">Visitor Info</h5>
+                    <h5 class="modal-title" id="updateReservationLabel">Patient Status</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="update-reservation-form">
@@ -235,7 +235,7 @@ if (isLoggedin() === false || $userRole == 'patient') {
     <script>
         $(document).ready(function() {
             // Get Visitor Information
-            $(document).on("click", ".visitor-id", function(e) {
+            $(document).on("click", ".patient-id", function(e) {
                 e.preventDefault();
                 $('#visitorInfoModal').modal('show');
                 let visitorID = $(this).data("id");

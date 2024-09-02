@@ -170,7 +170,7 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                 $('#cafeInfoModal').modal('show');
                 let doctorID = $(this).data("id");
                 $.ajax({
-                    url: 'ajax/cafe_info.php',
+                    url: 'ajax/doc_info.php',
                     method: 'post',
                     data: {
                         doctorID_modal: doctorID

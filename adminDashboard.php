@@ -151,7 +151,7 @@ if (isLoggedin() === false || $userRole != 'admin') {
                 $('#cafeInfoModal').modal('show');
                 let cafeID = $(this).data("id");
                 $.ajax({
-                    url: 'ajax/cafe_info.php',
+                    url: 'ajax/doc_info.php',
                     method: 'post',
                     data: {
                         cafeID_modal: cafeID

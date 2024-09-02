@@ -111,7 +111,7 @@ if (isLoggedin() === false) {
                 $("#start-time").removeAttr('disabled');
                 let docID = $(this).val();
                 $.ajax({
-                    url: 'ajax/cafe_info.php',
+                    url: 'ajax/doc_info.php',
                     method: 'POST',
                     data: {
                         docID: docID

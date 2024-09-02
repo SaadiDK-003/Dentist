@@ -71,7 +71,8 @@ require_once 'core/database.php';
                         </form>
                     </div>
                 </div>
-                <div id="render_list" class="render_list">
+                <!-- Render Clinic here -->
+                <div id="render_list" class="row render_list">
                 </div>
             </div>
         </section>

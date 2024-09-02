@@ -180,7 +180,7 @@ $edit_r_Q = $db->query("CALL `edit_reservation_visitor`($edit_res_id)");
                 $("#start-time").removeAttr('disabled');
                 let cafeID = $(this).val();
                 $.ajax({
-                    url: 'ajax/cafe_info.php',
+                    url: 'ajax/doc_info.php',
                     method: 'POST',
                     data: {
                         cafeID: cafeID

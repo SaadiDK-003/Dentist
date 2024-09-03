@@ -51,12 +51,12 @@ endif;
 if (isset($_POST['doctorID_modal'])) :
     $docID = $_POST['doctorID_modal'];
 
-    $cafe_Q = $db->query("CALL `get_cafe_info`($docID)");
+    $cafe_Q = $db->query("CALL `get_doc_info`($docID)");
     $response = array();
-    $cafe_data = mysqli_fetch_object($cafe_Q);
-    $store_open = date('h:i A', strtotime($cafe_data->store_open));
-    $store_close = date('h:i A', strtotime($cafe_data->store_close));
-    $response = ["cafeName" => $cafe_data->store_name, "ownerName" => $cafe_data->name, "ownerPhone" => $cafe_data->phone, "shopLocation" => $cafe_data->store_location, "shopOpen" => $store_open, "shopClose" => $store_close];
+    $doc_data = mysqli_fetch_object($cafe_Q);
+    $store_open = date('h:i A', strtotime($doc_data->checkin_time));
+    $store_close = date('h:i A', strtotime($doc_data->checkout_time));
+    $response = ["cafeName" => $doc_data->clinic_name, "ownerName" => $doc_data->name, "ownerPhone" => $doc_data->phone, "shopLocation" => $doc_data->clinic_location, "shopOpen" => $store_open, "shopClose" => $store_close];
     echo json_encode($response);
     $cafe_Q->close();
     $db->next_result();

@@ -65,19 +65,12 @@ require_once './core/database.php';
             border-top: 1px solid #ddd;
         }
 
-        .filters select {
-            margin: 0 10px;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
         /* Doctor Profiles Section */
         .doctor-profiles {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            max-width: 1360px;
+            margin-inline: auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             padding: 20px;
         }
 
@@ -85,14 +78,13 @@ require_once './core/database.php';
             display: flex;
             align-items: center;
             background-color: white;
+            flex-direction: column;
             margin: 15px;
             padding: 20px;
-            width: 300px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
             flex-wrap: wrap;
-            justify-content: space-around;
         }
 
         .doctor-card img {
@@ -150,58 +142,95 @@ require_once './core/database.php';
     </header>
 
     <!-- Search Bar Section -->
-    <div class="search-container">
+    <!-- <div class="search-container">
         <input type="text" placeholder="Search by name, specialty, or location...">
         <button type="button">Search</button>
-    </div>
+    </div> -->
 
     <!-- Filters Section -->
     <div class="filters">
-        <select>
-            <option value="all">All Specialties</option>
-            <option value="cardiology">Cardiology</option>
-            <option value="dermatology">Dermatology</option>
-            <option value="neurology">Neurology</option>
-            <option value="pediatrics">Pediatrics</option>
-        </select>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-4">
+                    <select class="form-select" name="specialist" id="specialist">
+                        <option value="" selected hidden>Select Specialties</option>
+                        <option value="BDS">BDS</option>
+                        <option value="RDS">RDS</option>
+                        <option value="MCPS-R">MCPS-R</option>
+                        <option value="BDS, RDS, MCPS-R(Oral surgery)">BDS, RDS, MCPS-R(Oral surgery)</option>
+                    </select>
+                </div>
 
-        <select>
-            <option value="all">All Locations</option>
-            <option value="new-york">Riyadh</option>
-            <option value="los-angeles">Baha</option>
-            <option value="Bisha">Bisha</option>
-            <option value="makkah">makkah</option>
-        </select>
+                <div class="col-12 col-md-4 d-none">
+                    <select class="form-select" name="city" id="city">
+                        <option value="" selected hidden>All Locations</option>
+                        <option value="Riyadh">Riyadh</option>
+                        <option value="Baha">Baha</option>
+                        <option value="Bisha">Bisha</option>
+                        <option value="Makkah">Makkah</option>
+                    </select>
+                </div>
 
-        <select>
-            <option value="all">Any Rating</option>
-            <option value="4+">4+ Stars</option>
-            <option value="3+">3+ Stars</option>
-            <option value="2+">2+ Stars</option>
-        </select>
+                <div class="col-12 col-md-4">
+                    <select class="form-select" name="rating" id="rating">
+                        <option value="" selected hidden>Select Rating</option>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="2">2 Stars</option>
+                        <option value="1">1 Stars</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Doctor Profiles Section -->
-    <div class="doctor-profiles">
+    <div class="doctor-profiles" id="doctor-profiles">
         <!-- Doctor Card -->
-        <div class="doctor-card">
-            <img src="./img/doc.jpg" alt="Doctor Photo">
-            <h3>Dr. Mohammed Omar</h3>
-            <p>Cardiologist | Riyadh</p>
-            <p>★★★★★</p>
-            <a href="callus.php"><button type="button">View Profile</button></a>
-        </div>
-
-        <div class="doctor-card">
-            <img src="./img/doc.jpg" alt="Doctor Photo">
-            <h3>Dr. Ahmad Omar</h3>
-            <p>Dermatologist | Baha</p>
-            <p>★★★★☆</p>
-            <a href="callus.php"><button type="button">View Profile</button></a>
-        </div>
 
         <!-- Add more doctor cards as needed -->
     </div>
+
+    <?php include 'includes/js_links.php'; ?>
+
+    <script>
+        $(document).ready(function() {
+            $("#specialist").on('change', function(e) {
+                e.preventDefault();
+                let specialist = $(this).val();
+                let rating = $("#rating").val();
+                $.ajax({
+                    url: 'ajax/doc_filter.php',
+                    method: 'post',
+                    data: {
+                        specialist: specialist,
+                        rating: rating
+                    },
+                    success: function(res) {
+                        $("#doctor-profiles").html(res);
+                    }
+                })
+            });
+
+            $("#rating").on('change', function(e) {
+                e.preventDefault();
+                let rating = $(this).val();
+                let specialist = $("#specialist").val();
+                $.ajax({
+                    url: 'ajax/doc_filter.php',
+                    method: 'post',
+                    data: {
+                        specialist: specialist,
+                        rating: rating
+                    },
+                    success: function(res) {
+                        $("#doctor-profiles").html(res);
+                    }
+                })
+            });
+        });
+    </script>
 
 </body>
 

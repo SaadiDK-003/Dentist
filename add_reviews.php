@@ -84,7 +84,7 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                                 <div class="col-12 mb-3">
                                     <input type="hidden" name="checked_count" id="checked-count" value="">
                                     <input type="hidden" name="res_id" id="res_id" value="<?= $_GET['res_id'] ?? '' ?>">
-                                    <input type="hidden" name="cafe_id" id="cafe_id" value="<?= $_GET['cafe_id'] ?? '' ?>">
+                                    <input type="hidden" name="doc_id" id="doc_id" value="<?= $_GET['doc_id'] ?? '' ?>">
                                     <div class="form-group d-flex justify-content-center justify-content-md-end">
                                         <button type="submit" name="submit" id="submit" class="btn btn-primary">Submit</button>
                                     </div>
@@ -148,8 +148,6 @@ if (isLoggedin() === false || $userRole == 'doctor') {
 
             // Initial update
             updateCheckedCount();
-
-            $('')
 
         });
     </script>

@@ -66,7 +66,7 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                                                 <?php if ($getRow->reviewed == 1) : ?>
                                                     -
                                                 <?php else : ?>
-                                                    <a href="./add_reviews.php?cafe_id=<?= $getRow->cafe_id ?>&res_id=<?= $getRow->r_id ?>" class="btn btn-primary">Review</a>
+                                                    <a href="./add_reviews.php?doc_id=<?= $getRow->doc_id ?>&res_id=<?= $getRow->r_id ?>" class="btn btn-primary">Review</a>
                                                 <?php endif; ?>
                                             <?php elseif ($getRow->r_status == 'reserved') : ?>
                                                 -
@@ -93,6 +93,74 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                         </table>
                     </div>
                     <!-- Reservation Table End -->
+
+                    <!-- Reservation Completed Table Start -->
+                    <div class="col-12 mt-4">
+                        <h3>Appointment Table Completed</h3>
+                    </div>
+                    <div class="col-12">
+                        <table id="example1" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Visiting Time</th>
+                                    <th>Status</th>
+                                    <th>Doctor Info</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $date = '';
+                                $getR_Q = $db->query("CALL `get_reservation_for_patient_completed`($userID)");
+                                while ($getRow = mysqli_fetch_object($getR_Q)) :
+                                    $date = date('d-M-Y h:i A', strtotime($getRow->start_time));
+                                ?>
+                                    <tr>
+                                        <td><?= $getRow->r_id ?></td>
+                                        <td><?= $date ?></td>
+                                        <td><?php
+                                            if ($getRow->r_status == 'pending') : ?>
+                                                <span class="btn btn-warning"><?= $getRow->r_status ?></span>
+                                            <?php elseif ($getRow->r_status == 'reserved') : ?>
+                                                <span class="btn btn-info"><?= $getRow->r_status ?></span>
+                                            <?php else : ?>
+                                                <span class="btn btn-success"><?= $getRow->r_status ?></span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><a href="#!" class="btn btn-secondary doctor-id" data-id="<?= $getRow->doc_id ?>">Doctor Info</a></td>
+                                        <td>
+                                            <?php if ($getRow->r_status == 'completed') : ?>
+                                                <?php if ($getRow->reviewed == 1) : ?>
+                                                    -
+                                                <?php else : ?>
+                                                    <a href="./add_reviews.php?doc_id=<?= $getRow->doc_id ?>&res_id=<?= $getRow->r_id ?>" class="btn btn-primary">Review</a>
+                                                <?php endif; ?>
+                                            <?php elseif ($getRow->r_status == 'reserved') : ?>
+                                                -
+                                            <?php else : ?>
+                                                <a href="edit_reservation.php?id=<?= $getRow->r_id ?>" class="btn btn-primary btn-sm edit-info">Edit</a>
+                                                <a href="#!" data-id="<?= $getRow->r_id ?>" class="btn btn-danger btn-sm del-info">Delete</a>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                <?php endwhile;
+                                $getR_Q->close();
+                                $db->next_result();
+                                ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Visiting Time</th>
+                                    <th>Status</th>
+                                    <th>Doctor Info</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- Reservation Completed Table End -->
 
                 </div>
             </div>

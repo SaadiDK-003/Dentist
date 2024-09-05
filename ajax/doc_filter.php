@@ -36,19 +36,15 @@ if (isset($_POST['specialist']) && $_POST['rating'] != ''):
             <img src="./img/doc.jpg" alt="Doctor Photo">
             <h3><?= $spe_list_->name ?></h3>
             <p><?= $spe_list_->certificate ?> | <?= $spe_list_->city ?></p>
-            <?php
-            if ($spe_list_->rating == 1):
-            ?>
-                <p>★</p>
-            <?php elseif ($spe_list_->rating == 2): ?>
-                <p>★★</p>
-            <?php elseif ($spe_list_->rating == 3): ?>
-                <p>★★★</p>
-            <?php elseif ($spe_list_->rating == 4): ?>
-                <p>★★★★</p>
-            <?php elseif ($spe_list_->rating == 5): ?>
-                <p>★★★★★</p>
-            <?php endif; ?>
+
+            <div class="ratings mb-2 <?= 'rate-' . $spe_list_->rating ?>">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+
             <a href="#!callus.php"><button type="button">View Profile</button></a>
         </div>
 

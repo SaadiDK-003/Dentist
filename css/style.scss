@@ -266,6 +266,37 @@ body {
       }
     }
 
+    .ratings {
+      i {
+        color: var(--light-gray);
+      }
+      &.rate-1 {
+        i:nth-child(n + 1):nth-child(-n + 1) {
+          color: var(--gold);
+        }
+      }
+      &.rate-2 {
+        i:nth-child(n + 1):nth-child(-n + 2) {
+          color: var(--gold);
+        }
+      }
+      &.rate-3 {
+        i:nth-child(n + 1):nth-child(-n + 3) {
+          color: var(--gold);
+        }
+      }
+      &.rate-4 {
+        i:nth-child(n + 1):nth-child(-n + 4) {
+          color: var(--gold);
+        }
+      }
+      &.rate-5 {
+        i {
+          color: var(--gold);
+        }
+      }
+    }
+
     .filter_container {
       &.loading {
         &::before {

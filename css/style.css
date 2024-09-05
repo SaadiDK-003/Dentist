@@ -306,6 +306,24 @@ body.menu_page .card .img, body.cafe_menu_page .card .img {
   width: 100%;
   height: 180px;
 }
+body.menu_page .ratings i, body.cafe_menu_page .ratings i {
+  color: var(--light-gray);
+}
+body.menu_page .ratings.rate-1 i:nth-child(n+1):nth-child(-n+1), body.cafe_menu_page .ratings.rate-1 i:nth-child(n+1):nth-child(-n+1) {
+  color: var(--gold);
+}
+body.menu_page .ratings.rate-2 i:nth-child(n+1):nth-child(-n+2), body.cafe_menu_page .ratings.rate-2 i:nth-child(n+1):nth-child(-n+2) {
+  color: var(--gold);
+}
+body.menu_page .ratings.rate-3 i:nth-child(n+1):nth-child(-n+3), body.cafe_menu_page .ratings.rate-3 i:nth-child(n+1):nth-child(-n+3) {
+  color: var(--gold);
+}
+body.menu_page .ratings.rate-4 i:nth-child(n+1):nth-child(-n+4), body.cafe_menu_page .ratings.rate-4 i:nth-child(n+1):nth-child(-n+4) {
+  color: var(--gold);
+}
+body.menu_page .ratings.rate-5 i, body.cafe_menu_page .ratings.rate-5 i {
+  color: var(--gold);
+}
 body.menu_page .filter_container.loading::before, body.cafe_menu_page .filter_container.loading::before {
   content: "";
   position: absolute;

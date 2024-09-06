@@ -1,5 +1,10 @@
 <?php
 require_once './core/database.php';
+$doc_id = 0;
+if (isset($_GET['doc_id'])):
+    $doc_id = $_GET['doc_id'];
+endif;
+
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +13,7 @@ require_once './core/database.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= TITLE ?> | Call Us - Doctor Profile</title>
+    <title><?= TITLE ?> | Call Us - Doctor Profile <?= $doc_id ?></title>
     <?php include './includes/css_links.php'; ?>
     <link rel="stylesheet" href="./css/style.min.css">
     <style>
@@ -23,8 +28,7 @@ require_once './core/database.php';
 
         /* Container Styles */
         .container-page {
-            max-width: 1200px;
-            margin: 20px auto;
+            margin-block: 30px;
             padding: 20px;
             background-color: white;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -112,6 +116,7 @@ require_once './core/database.php';
             font-size: 16px;
             color: #666;
         }
+
         .availability-card button {
             padding: 10px 20px;
             background-color: #4CAF50;
@@ -139,6 +144,9 @@ require_once './core/database.php';
             border-radius: 8px;
             text-align: center;
             margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .unavailability-card:last-child {
@@ -156,6 +164,7 @@ require_once './core/database.php';
             font-size: 16px;
             color: #666;
         }
+
         .unavailability-card button {
             padding: 10px 20px;
             background-color: #ff0000;
@@ -174,120 +183,59 @@ require_once './core/database.php';
 <body class="menu_page">
     <?php include_once './includes/header.php'; ?>
 
-    <div class="container-page">
-
-        <!-- Doctor Profile Section -->
-        <div class="profile">
-            <img src="./img/doc.jpg" alt="Doctor Photo">
-            <div class="profile-info">
-                <h2>Dr. Mohammed Omar</h2>
-                <p>Cardiologist</p>
-                <p>Riyadh</p>
+    <div class="container container-page">
+        <?php
+        $doc_info_Q = $db->query("CALL `get_doc_info`($doc_id)");
+        if (mysqli_num_rows($doc_info_Q) > 0):
+            $docInfo = mysqli_fetch_object($doc_info_Q);
+        ?>
+            <!-- Doctor Profile Section -->
+            <div class="profile">
+                <img src="./img/doc.jpg" alt="Doctor Photo">
+                <div class="profile-info">
+                    <h2><?= $docInfo->name ?></h2>
+                    <p><?= $docInfo->certificate ?></p>
+                    <p><?= $docInfo->city ?></p>
+                </div>
             </div>
-        </div>
 
-        <!-- Contact Info Section -->
-        <div class="contact-info">
-            <h3>Contact Information</h3>
-            <p>Email: Dr. Mohammed Omar@example.com</p>
-            <p>Phone: (123) 456-7890</p>
-            <p>Address: 123 Main Street, Riyadh, 10001</p>
-        </div>
+            <!-- Contact Info Section -->
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <p>Email: <?= $docInfo->email ?></p>
+                <p>Phone: <?= $docInfo->phone ?></p>
+                <p>Address: <?= $docInfo->clinic_location ?></p>
+            </div>
 
-        <!-- Availability Section -->
-        <div class="availability">
-            <div class="availability-card">
-                <h4>Today</h4>
-                <p>9:00 AM - 5:00 PM</p>
-                <button>Available</button>
+            <!-- Availability Section -->
+            <div class="availability">
+                <div class="availability-card">
+                    <h4>Weekdays</h4>
+                    <p><?= date('h:m A', strtotime($docInfo->checkin_time)) ?> - <?= date('h:m A', strtotime($docInfo->checkout_time)) ?></p>
+                    <button>Available</button>
+                </div>
+                <div class="<?= ($docInfo->weekend_available != 'no') ? 'availability-card' : 'unavailability-card' ?>">
+                    <?php if ($docInfo->weekend_available != 'no'): ?>
+                        <h4>Weekends</h4>
+                        <p><?= date('h:m A', strtotime($docInfo->checkin_time)) ?> - <?= date('h:m A', strtotime($docInfo->checkout_time)) ?></p>
+                        <button>Available</button>
+                    <?php else: ?>
+                        <button>Unavailable</button>
+                    <?php endif; ?>
+                </div>
             </div>
-            <div class="unavailability-card">
-                <h4>Tomorrow</h4>
-                <p>10:00 AM - 6:00 PM</p>
-                <button>Unavailable</button>
-            </div>
-        </div>
+        <?php else: ?>
+            <h3 class="text-center mb-0">No Info Available.</h3>
+        <?php endif; ?>
 
     </div>
 
     <?php include './includes/js_links.php'; ?>
 
-    <script>/*
+    <script>
         $(document).ready(function() {
-            $.ajax({
-                url: 'ajax/products_by_category.php',
-                beforeSend: function() {
-                    $('.filter_container').addClass('loading');
-                },
-                success: function(response) {
-                    $('.filter_container').removeClass('loading');
-                    $(".filter_container").html(response);
-                }
 
-            });
-
-            // filter by ID
-            $(document).on('click', '.filter_btn', function(e) {
-                let filter_id = $(this).data('filter');
-                $.ajax({
-                    url: 'ajax/products_by_category.php',
-                    method: 'post',
-                    data: {
-                        filter_id: filter_id
-                    },
-                    beforeSend: function() {
-                        $('.filter_container').addClass('loading');
-                    },
-                    success: function(response) {
-                        $('.filter_container').removeClass('loading');
-                        $(".filter_container").html(response);
-                    }
-
-                });
-            });
-
-            // filter by dropDown
-            $(document).on('change', 'select[name="filter_"]', function(e) {
-                let filter_id = $(this).val();
-                $.ajax({
-                    url: 'ajax/products_by_category.php',
-                    method: 'post',
-                    data: {
-                        filter_id: filter_id
-                    },
-                    beforeSend: function() {
-                        $('.filter_container').addClass('loading');
-                    },
-                    success: function(response) {
-                        $('.filter_container').removeClass('loading');
-                        $(".filter_container").html(response);
-                    }
-
-                });
-            });
-
-            $(document).on("click", ".cafe-info", function(e) {
-                e.preventDefault();
-                $('#cafeInfoModal').modal('show');
-                let cafeID = $(this).data("id");
-                $.ajax({
-                    url: 'ajax/cafe_info.php',
-                    method: 'post',
-                    data: {
-                        cafeID_modal: cafeID
-                    },
-                    success: function(response) {
-                        let res = JSON.parse(response);
-                        $(".cafeName").html(res.cafeName);
-                        $("#ownerName").html(res.ownerName);
-                        $("#ownerPhone").html(res.ownerPhone);
-                        $("#shopLocation").html(res.shopLocation);
-                        $("#shopOpen").html('open: ' + res.shopOpen);
-                        $("#shopClose").html('close: ' + res.shopClose);
-                    }
-                });
-            });
-        });*/
+        });
     </script>
 </body>
 

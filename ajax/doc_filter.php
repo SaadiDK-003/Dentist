@@ -13,7 +13,8 @@ if (isset($_POST['specialist']) && empty($_POST['rating'])):
             <img src="./img/doc.jpg" alt="Doctor Photo">
             <h3><?= $spe_list->name ?></h3>
             <p><?= $spe_list->certificate ?> | <?= $spe_list->city ?></p>
-            <a href="#!callus.php"><button type="button">View Profile</button></a>
+
+            <a class="btn btn-primary" target="_blank" href="callus.php?doc_id=<?= $spe_list->u_id ?>">View Profile</a>
         </div>
 
     <?php endwhile;
@@ -36,7 +37,7 @@ if (isset($_POST['specialist']) && $_POST['rating'] != ''):
             <img src="./img/doc.jpg" alt="Doctor Photo">
             <h3><?= $spe_list_->name ?></h3>
             <p><?= $spe_list_->certificate ?> | <?= $spe_list_->city ?></p>
-
+            <p><?= $spe_list_->comments ?></p>
             <div class="ratings mb-2 <?= 'rate-' . $spe_list_->rating ?>">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -45,7 +46,7 @@ if (isset($_POST['specialist']) && $_POST['rating'] != ''):
                 <i class="fas fa-star"></i>
             </div>
 
-            <a href="#!callus.php"><button type="button">View Profile</button></a>
+            <a class="btn btn-primary" target="_blank" href="callus.php?doc_id=<?= $spe_list_->u_id ?>">View Profile</a>
         </div>
 
 <?php

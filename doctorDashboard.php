@@ -82,65 +82,62 @@ if (isLoggedin() === false || $userRole == 'patient') {
                     </div>
                     <!-- RESERVATION TABLE END -->
 
-                    <!-- PRODUCTS TABLE START -->
-                    <?php if ($cafeOwner_CafeID != '') : ?>
-                        <div class="col-12 mt-5">
-                            <h3>Products Table</h3>
-                        </div>
-                        <div class="col-12">
-                            <table id="example1" class="table table-striped table-bordered" style="width:100%">
-                                <thead>
+
+                    <!-- RESERVATION TABLE COMPLETED START -->
+                    <div class="col-12">
+                        <h3>Appointment Table</h3>
+                    </div>
+                    <div class="col-12">
+                        <table id="example1" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Start Time</th>
+                                    <th>Status</th>
+                                    <th>Patient Info</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                $date = '';
+                                $getR_Q = $db->query("CALL `get_appointment_patient_completed`($userID)");
+                                while ($getRow = mysqli_fetch_object($getR_Q)) :
+                                    $date = date('d-M-Y h:i A', strtotime($getRow->start_time));
+                                ?>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Prod Name</th>
-                                        <th>Reg price</th>
-                                        <th>Disc Price</th>
-                                        <th>Prod Desc</th>
-                                        <th>Prod Img</th>
-                                        <th>Category Name</th>
-                                        <th>Action</th>
+                                        <td><?= $getRow->r_id ?></td>
+                                        <td><?= $date ?></td>
+                                        <td><?php
+                                            if ($getRow->r_status == 'pending') : ?>
+                                                <span class="btn btn-warning"><?= $getRow->r_status ?></span>
+                                            <?php elseif ($getRow->r_status == 'reserved') : ?>
+                                                <span class="btn btn-info"><?= $getRow->r_status ?></span>
+                                            <?php else : ?>
+                                                <span class="btn btn-success"><?= $getRow->r_status ?></span>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td><a href="#!" class="btn btn-secondary patient-id" data-id="<?= $getRow->patient_id ?>">Patient Info</a></td>
+                                        <td><a href="#!" data-id="<?= $getRow->r_id ?>" class="btn btn-primary btn-sm update-info">Update</a></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $date = '';
-                                    $getPR_Q = $db->query("CALL `get_all_products_by_cafe_id`($cafeOwner_CafeID)");
-                                    while ($getPRow = mysqli_fetch_object($getPR_Q)) :
-                                    ?>
-                                        <tr>
-                                            <td><?= $getPRow->p_id ?></td>
-                                            <td><?= $getPRow->prod_name ?></td>
-                                            <td><?= $getPRow->prod_reg_price ?></td>
-                                            <td><?= $getPRow->prod_disc_price ?></td>
-                                            <td><?= $getPRow->prod_desc ?></td>
-                                            <td><img width="60" height="60" class="rounded-2 mx-auto" src="<?= $getPRow->prod_img ?>" alt=""></td>
-                                            <td><?= $getPRow->category_name ?></td>
-                                            <td>
-                                                <a href="edit_product.php?id=<?= $getPRow->p_id ?>" class="btn btn-primary btn-sm">Edit</a>
-                                                <a href="#!" data-id="<?= $getPRow->p_id ?>" class="btn btn-danger btn-sm del-prod">Delete</a>
-                                            </td>
-                                        </tr>
-                                    <?php endwhile;
-                                    $getPR_Q->close();
-                                    $db->next_result();
-                                    ?>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Prod Name</th>
-                                        <th>Reg price</th>
-                                        <th>Disc Price</th>
-                                        <th>Prod Desc</th>
-                                        <th>Prod Img</th>
-                                        <th>Category Name</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                        </div>
-                    <?php endif; ?>
-                    <!-- PRODUCTS TABLE END -->
+                                <?php endwhile;
+                                $getR_Q->close();
+                                $db->next_result();
+                                ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Start Time</th>
+                                    <th>Status</th>
+                                    <th>Patient Info</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                    <!-- RESERVATION TABLE COMPLETED END -->
+
                 </div>
             </div>
         </section>

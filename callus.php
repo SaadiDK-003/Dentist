@@ -99,6 +99,10 @@ endif;
             border-radius: 8px;
             text-align: center;
             margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
 
         .availability-card:last-child {
@@ -217,7 +221,7 @@ endif;
                 <div class="<?= ($docInfo->weekend_available != 'no') ? 'availability-card' : 'unavailability-card' ?>">
                     <?php if ($docInfo->weekend_available != 'no'): ?>
                         <h4>Weekends</h4>
-                        <p><?= date('h:m A', strtotime($docInfo->checkin_time)) ?> - <?= date('h:m A', strtotime($docInfo->checkout_time)) ?></p>
+                        <p class="d-none"><?= date('h:m A', strtotime($docInfo->checkin_time)) ?> - <?= date('h:m A', strtotime($docInfo->checkout_time)) ?></p>
                         <button>Available</button>
                     <?php else: ?>
                         <button>Unavailable</button>

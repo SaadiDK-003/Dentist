@@ -188,8 +188,24 @@ require_once './core/database.php';
     <!-- Doctor Profiles Section -->
     <div class="doctor-profiles" id="doctor-profiles">
         <!-- Doctor Card -->
+        <?php
+        $spe_q = $db->query("CALL `get_all_doctors`()");
+        while ($spe_list = mysqli_fetch_object($spe_q)):
+        ?>
 
-        <!-- Add more doctor cards as needed -->
+            <div class="doctor-card">
+                <img src="./img/doc.jpg" alt="Doctor Photo">
+                <h3><?= $spe_list->name ?></h3>
+                <p><?= $spe_list->certificate ?> | <?= $spe_list->city ?></p>
+
+                <a class="btn btn-primary" target="_blank" href="callus.php?doc_id=<?= $spe_list->u_id ?>">View Profile</a>
+            </div>
+
+        <?php endwhile;
+        $spe_q->close();
+        $db->next_result();
+        ?>
+
     </div>
 
     <?php include 'includes/js_links.php'; ?>

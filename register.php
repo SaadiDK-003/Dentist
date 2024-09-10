@@ -82,8 +82,18 @@ if (isLoggedin() === true) {
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="age">Age</label>
-                                            <input type="text" name="age" id="age" class="form-control" required>
+                                            <label for="dob">Date of Birth</label>
+                                            <input type="date" name="dob" id="dob" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="gender">Gender</label>
+                                            <select type="date" name="gender" id="gender" class="form-control" required>
+                                                <option value="" selected hidden>Select Gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
@@ -144,8 +154,18 @@ if (isLoggedin() === true) {
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">
                                         <div class="form-group">
-                                            <label for="age">Age</label>
-                                            <input type="text" name="age" id="age" class="form-control" required>
+                                            <label for="dob">Date Of Birth</label>
+                                            <input type="date" name="dob" id="dob" class="form-control" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="gender">Gender</label>
+                                            <select type="date" name="gender" id="gender" class="form-control" required>
+                                                <option value="" selected hidden>Select Gender</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">

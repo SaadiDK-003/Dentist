@@ -48,26 +48,21 @@ require_once 'core/database.php';
                     <div class="col-12 col-md-6 mx-auto">
                         <form id="findClinicForm">
                             <!-- Dropdown List -->
-                            <select id="category" name="category" class="form-select mb-3">
+                            <select id="city" name="city" class="form-select mb-3">
                                 <option value="all">Choose the Area</option>
                                 <option value="riyadh">Riyadh</option>
                                 <option value="baha">Baha</option>
                                 <option value="biesha">Biesha</option>
+                                <option value="makkah">Makkah</option>
                             </select>
                             <!-- Text Box -->
-                            <select id="search_clinic" name="search_clinic" class="form-select mb-3">
+                            <select id="search_clinic" name="search_clinic" class="form-select mb-3" disabled>
                                 <option value="" selected hidden>Select Clinic</option>
-                                <?php
-                                $clinic_Q = $db->query("SELECT * FROM `clinic` WHERE `status`='1'");
-                                while ($clinic_list = mysqli_fetch_object($clinic_Q)):
-                                ?>
-                                    <option value="<?= $clinic_list->id ?>"><?= $clinic_list->clinic_name ?></option>
-                                <?php endwhile; ?>
                             </select>
 
 
                             <!-- Search Button -->
-                            <button type="submit" class="btn btn-secondary w-100">Search</button>
+                            <button type="submit" id="search-clinic-btn" class="btn btn-secondary w-100" disabled>Search</button>
                         </form>
                     </div>
                 </div>
@@ -84,22 +79,49 @@ require_once 'core/database.php';
     <?php include './includes/js_links.php'; ?>
     <script>
         $(document).ready(function() {
-            $('#search_clinic').on('change', function(e) {
+            $('#city').on('change', function(e) {
                 e.preventDefault();
-                let clinic_id = $(this).val();
+                let city = $(this).val();
 
                 $.ajax({
                     url: 'ajax/clinic_info.php',
                     method: 'post',
                     data: {
-                        clinic_id: clinic_id
+                        city: city
+                    },
+                    beforeSend: function() {
+                        $("#search_clinic").children().remove();
                     },
                     success: function(res) {
-                        $("#render_list").html(res);
+                        $("#search_clinic").append(res);
+                        if ($("#search_clinic").children('option').length > 0) {
+                            $("#search_clinic, #search-clinic-btn").removeAttr('disabled');
+                        } else {
+                            $("#search_clinic, #search-clinic-btn").attr('disabled', true);
+                        }
                     }
-                })
+                });
 
-            })
+                $(document).on('click', '#search-clinic-btn', function(e) {
+                    e.preventDefault();
+                    let clinic_id = $("#search_clinic").val();
+                    console.log(clinic_id);
+
+                    $.ajax({
+                        url: 'ajax/clinic_info.php',
+                        method: 'post',
+                        data: {
+                            clinic_id: clinic_id
+                        },
+                        success: function(res) {
+                            $("#render_list").html(res);
+                        }
+                    });
+
+                });
+
+            });
+
         });
     </script>
 </body>

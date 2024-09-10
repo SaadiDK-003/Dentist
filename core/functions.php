@@ -42,6 +42,8 @@ function register($POST)
     $pwd = $POST['password'];
     $r_pwd = $POST['re_password'];
     $user_type = $POST['user_type'];
+    $dob = $POST['dob'];
+    $gender = $POST['gender'];
     // EMPTY VARIABLES
     $response = '';
     $user_type_ = '';
@@ -65,7 +67,6 @@ function register($POST)
         $weekend = $_POST['weekend_available'];
     }
 
-
     $checkEmail = $db->query("SELECT email FROM `users` WHERE `email`='$email'");
     $phone_length = strlen($phone);
     $pwd_length = strlen($pwd);
@@ -82,7 +83,7 @@ function register($POST)
                     $response = '<h6 class="text-center alert alert-danger">Password & Confirm Password do not match.</h6>';
                 else :
                     $pwd = md5($pwd);
-                    $insertQ = $db->query("INSERT INTO `users` (name,username,email,password,phone,diseases,certificate,experience,role,clinic_id,checkin_time,checkout_time,weekend_available) VALUES('$name','$username','$email','$pwd','$phone','$diseases','$certificate','$experience','$user_type','1','$checkin_time','$checkout_time','$weekend')");
+                    $insertQ = $db->query("INSERT INTO `users` (name,username,email,password,phone,diseases,certificate,experience,role,clinic_id,checkin_time,checkout_time,weekend_available,dob,gender) VALUES('$name','$username','$email','$pwd','$phone','$diseases','$certificate','$experience','$user_type','1','$checkin_time','$checkout_time','$weekend','$dob','$gender')");
                     if ($insertQ) {
                         $response = '<h6 class="text-center alert alert-success">' . $user_type_ . ' registered successfully.</h6>
                 <script>

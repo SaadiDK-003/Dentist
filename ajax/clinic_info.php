@@ -1,11 +1,22 @@
 <?php
 require_once '../core/database.php';
 
+if (isset($_POST['city']) && !isset($_POST['clinic_id'])):
+    $city = $_POST['city'];
+    $clinic_Q = $db->query("SELECT * FROM `clinic` WHERE `status`='1' AND `city`='$city'");
+?>
+    <?php
+    while ($clinic_list = mysqli_fetch_object($clinic_Q)): ?>
+        <option value="<?= $clinic_list->id ?>"><?= $clinic_list->clinic_name ?></option>
+    <?php endwhile;
+endif;
+
+
 if (isset($_POST['clinic_id'])):
     $c_id = $_POST['clinic_id'];
     $C_List = $db->query("Call `get_doc_by_clinic_id`($c_id)");
     while ($list = mysqli_fetch_object($C_List)):
-?>
+    ?>
         <div class="col-12 col-md-4 mb-3">
             <div class="box">
                 <h5><?= $list->clinic_name ?></h5>
@@ -24,7 +35,7 @@ if (isset($_POST['clinic_id'])):
         </div>
 <?php
     endwhile;
+    $C_List->close();
+    $db->next_result();
 endif;
-$C_List->close();
-$db->next_result();
 ?>

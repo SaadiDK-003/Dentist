@@ -51,6 +51,7 @@ endif;
 
         .profile-info {
             flex: 1;
+            position: relative;
         }
 
         .profile-info h2 {
@@ -63,6 +64,26 @@ endif;
             margin: 5px 0;
             font-size: 16px;
             color: #666;
+        }
+
+        .buttons-wrapper {
+            display: grid;
+            gap: 10px;
+            position: absolute;
+            top: 0;
+            right: 10px;
+        }
+
+        .buttons-wrapper a {
+            position: relative;
+        }
+
+        .buttons-wrapper a:first-child::before {
+            content: 'Clinic: ';
+            position: absolute;
+            left: -55px;
+            color: #000;
+            font-weight: bold;
         }
 
         /* Contact Info Section */
@@ -200,6 +221,10 @@ endif;
                     <h2><?= $docInfo->name ?></h2>
                     <p><?= $docInfo->certificate ?></p>
                     <p><?= $docInfo->city ?></p>
+                    <div class="buttons-wrapper">
+                        <a href="tel:<?= $docInfo->clinic_number ?>" class="btn btn-success"><?= $docInfo->clinic_number ?></a>
+                        <a href="./appointment.php" class="btn btn-primary">Appointment Form</a>
+                    </div>
                 </div>
             </div>
 

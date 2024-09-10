@@ -235,12 +235,12 @@ if (isLoggedin() === false || $userRole == 'patient') {
             $(document).on("click", ".patient-id", function(e) {
                 e.preventDefault();
                 $('#visitorInfoModal').modal('show');
-                let visitorID = $(this).data("id");
+                let patient_ID = $(this).data("id");
                 $.ajax({
-                    url: 'ajax/visitor_info.php',
+                    url: 'ajax/patient_info.php',
                     method: 'post',
                     data: {
-                        visitorID_modal: visitorID
+                        patient_ID_modal: patient_ID
                     },
                     success: function(response) {
                         let res = JSON.parse(response);

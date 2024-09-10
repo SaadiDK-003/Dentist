@@ -1,10 +1,10 @@
 <?php
 require_once '../core/database.php';
 
-if (isset($_POST['visitorID_modal'])) :
-    $visitorID = $_POST['visitorID_modal'];
+if (isset($_POST['patient_ID_modal'])) :
+    $patientID = $_POST['patient_ID_modal'];
 
-    $r_Q = $db->query("CALL `get_visitor_info`($visitorID)");
+    $r_Q = $db->query("CALL `get_visitor_info`($patientID)");
     $response = array();
     $v_data = mysqli_fetch_object($r_Q);
 

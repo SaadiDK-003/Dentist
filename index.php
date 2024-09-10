@@ -20,17 +20,9 @@ require_once 'core/database.php';
             <div class="container">
                 <div class="content hero-content">
                     <h1>MY DOCTOR CLINIC</h1>
-                </div>
-            </div>
-        </section>
-        <section class="calendar">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-8 mx-auto position-relative">
-                        <div class="text-center">
-                            <h2 class="text-center">Browse Your Doctors</h2>
+                    <div class="text-center">
+                            <h2 class="text-center text-white">Browse Your Doctors</h2>
                             <a href="doctors.php" class="btn btn-primary">Browse Your Doctors</a>
-                        </div>
                     </div>
                 </div>
             </div>

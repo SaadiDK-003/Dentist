@@ -176,7 +176,7 @@ body main section {
   position: relative;
 }
 body main section.hero {
-  height: 450px;
+  height: 700px;
   background-image: url("../img/bannerimg.png");
   background-repeat: no-repeat;
   background-position: 100% 38%;

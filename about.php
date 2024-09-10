@@ -33,7 +33,7 @@ require_once 'core/database.php';
                 <div class="content hero-about-content">
                     <h1>About</h1>
                     <h1>Welcome To Our My Doctor Clinic</h1>
-                    <a href="#findClinicForm" class="btn btn-secondary btn-lg btn-block">Find A Clinic</a>
+                    <!-- <a href="#findClinicForm" class="btn btn-secondary btn-lg btn-block">Find A Clinic</a> -->
                 </div>
             </div>
         </section>
@@ -47,6 +47,13 @@ require_once 'core/database.php';
                 <div class="row">
                     <div class="col-12 col-md-6 mx-auto">
                         <form id="findClinicForm">
+                            <!-- Dropdown List -->
+                            <select id="category" name="category" class="form-select mb-3">
+                                <option value="all">Choose the Area</option>
+                                <option value="riyadh">Riyadh</option>
+                                <option value="baha">Baha</option>
+                                <option value="biesha">Biesha</option>
+                            </select>
                             <!-- Text Box -->
                             <select id="search_clinic" name="search_clinic" class="form-select mb-3">
                                 <option value="" selected hidden>Select Clinic</option>
@@ -58,13 +65,6 @@ require_once 'core/database.php';
                                 <?php endwhile; ?>
                             </select>
 
-                            <!-- Dropdown List -->
-                            <select id="category" name="category" class="form-select mb-3">
-                                <option value="all">Choose the Area</option>
-                                <option value="riyadh">Riyadh</option>
-                                <option value="baha">Baha</option>
-                                <option value="biesha">Biesha</option>
-                            </select>
 
                             <!-- Search Button -->
                             <button type="submit" class="btn btn-secondary w-100">Search</button>

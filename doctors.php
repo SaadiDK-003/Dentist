@@ -174,11 +174,11 @@ require_once './core/database.php';
                 <div class="col-12 col-md-4">
                     <select class="form-select" name="rating" id="rating">
                         <option value="" selected hidden>Select Rating</option>
-                        <option value="5">5 Stars</option>
-                        <option value="4">4 Stars</option>
-                        <option value="3">3 Stars</option>
-                        <option value="2">2 Stars</option>
-                        <option value="1">1 Stars</option>
+                        <option value="5">⭐⭐⭐⭐⭐</option>
+                        <option value="4">⭐⭐⭐⭐</option>
+                        <option value="3">⭐⭐⭐</option>
+                        <option value="2">⭐⭐</option>
+                        <option value="1">⭐</option>
                     </select>
                 </div>
             </div>

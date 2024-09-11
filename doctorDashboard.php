@@ -22,9 +22,10 @@ if (isLoggedin() === false || $userRole == 'patient') {
         <section class="cafe_owner_dashboard">
             <div class="container my-5">
                 <div class="row">
-                    <div class="col-12 text-center">
+                    <div class="col-12 text-center position-relative">
                         <h1>Dashboard</h1>
                         <h5>Welcome, <?= $userName ?></h5>
+                        <a href="edit_profile.php?u_id=<?= $userID ?>" class="edit-profile-btn position-absolute btn btn-primary">Edit Profile</a>
                     </div>
 
                     <!-- RESERVATION TABLE START -->

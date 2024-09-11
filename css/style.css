@@ -172,6 +172,10 @@ body #calendar_inline .list-group-flush::-webkit-scrollbar-thumb {
 body #calendar_inline .list-group-flush::-webkit-scrollbar-track {
   background-color: var(--light-gray);
 }
+body .edit-profile-btn {
+  top: 0;
+  right: 10px;
+}
 body main section {
   position: relative;
 }

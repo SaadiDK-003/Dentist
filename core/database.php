@@ -9,7 +9,7 @@ $userName = '';
 $userEmail = '';
 $userPhone = '';
 $userRole = '';
-$cafeOwner_CafeID = '';
+$clinic__ID = '';
 if (isset($_SESSION['user'])) {
     $userID = $_SESSION['user'];
     $getUserQ = $db->query("SELECT * FROM `users` WHERE `id`='$userID'");
@@ -18,12 +18,13 @@ if (isset($_SESSION['user'])) {
     $userEmail = $userData->email;
     $userPhone = $userData->phone;
     $userRole = $userData->role;
+    $clinic_ID = $userData->clinic_id;
 
     if ($userRole == 'doctor') {
-        $getCafeQ = $db->query("SELECT * FROM `cafe` WHERE `users_id`='$userID'");
+        $getCafeQ = $db->query("SELECT * FROM `clinic` WHERE `id`='$clinic_ID'");
         if (mysqli_num_rows($getCafeQ) > 0) {
-            $getCafeData = mysqli_fetch_object($getCafeQ);
-            $cafeOwner_CafeID = $getCafeData->id;
+            $getClinicData = mysqli_fetch_object($getCafeQ);
+            $clinic__ID = $getClinicData->id;
         }
     }
 }

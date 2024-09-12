@@ -8,8 +8,8 @@
         <div class="row">
             <div class="col-2 content-center">
                 <a href="./">
-                   <!-- <img src="./img/logo_bg_black.png" class="w-25" alt="logo-1">-->
-                   <img src="./img/logo.jpeg" class="w-75" alt="logo-1">
+                    <!-- <img src="./img/logo_bg_black.png" class="w-25" alt="logo-1">-->
+                    <img src="./img/logo.jpeg" class="w-75" alt="logo-1">
                 </a>
                 <!-- <h3>LOGO</h3> -->
             </div>
@@ -19,7 +19,7 @@
                     <li><a href="./about.php">About</a></li>
                     <li><a href="./services.php">Services</a></li>
                     <li><a href="./doctors.php">The Doctors</a></li>
-                    <li><a href="./callus.php">Call Us</a></li>
+                    <!-- <li><a href="./callus.php">Call Us</a></li> -->
                 </ul>
             </div>
             <div class="col-3 content-center gap-3 flex-column flex-md-row">
@@ -32,7 +32,7 @@
                         <a class="btn btn-primary border border-3" href="appointment.php">Appointment</a>
                         <a class="btn btn-primary border border-3" href="dashboard.php">Dashboard</a>
                     <?php endif; ?>
-                    
+
                     <a class="btn btn-danger border border-3" href="logout.php">Logout</a>
                 <?php else : ?>
                     <!--<a class="btn btn-primary border border-3" href="./login.php">Reservation</a>-->

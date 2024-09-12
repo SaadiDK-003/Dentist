@@ -66,11 +66,26 @@ $usr_Q = $db->query("SELECT * FROM `users` WHERE `id`='$getID'");
                                             <input type="date" name="dob" value="<?= isset($_POST['dob']) ? $_POST['dob'] : $edit_data->dob ?>" id="dob" class="form-control" required>
                                         </div>
                                     </div>
+                                    <div class="col-12 col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label for="gender">Gender</label>
+                                            <select name="gender" id="gender" class="form-select">
+                                                <option value="Male" <?= ($edit_data->gender == 'Male') ? 'selected' : '' ?>>Male</option>
+                                                <option value="Female" <?= ($edit_data->gender == 'Female') ? 'selected' : '' ?>>Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <?php if ($clinic__ID != ''): ?>
                                         <div class="col-12 col-md-6 mb-3">
                                             <div class="form-group">
                                                 <label for="certificate">Certificate</label>
                                                 <input type="text" name="certificate" value="<?= isset($_POST['certificate']) ? $_POST['certificate'] : $edit_data->certificate ?>" id="certificate" class="form-control" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <div class="form-group">
+                                                <label for="experience">Experience</label>
+                                                <input type="text" name="experience" value="<?= isset($_POST['experience']) ? $_POST['experience'] : $edit_data->experience ?>" id="experience" class="form-control" required>
                                             </div>
                                         </div>
                                     <?php else: ?>
@@ -92,6 +107,7 @@ $usr_Q = $db->query("SELECT * FROM `users` WHERE `id`='$getID'");
                                     <div class="col-12 col-md-12 mb-3 d-flex align-items-end">
                                         <input type="hidden" name="user_id" value="<?= $edit_data->id ?>">
                                         <input type="hidden" name="old_pwd" value="<?= $edit_data->password ?>">
+                                        <input type="hidden" name="user_role" value="<?= $userRole ?>">
                                         <div class="form-group d-flex justify-content-center justify-content-md-end w-100">
                                             <button type="submit" name="submit" id="submit" class="btn btn-primary">Update</button>
                                         </div>

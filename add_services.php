@@ -11,7 +11,7 @@ if (isLoggedin() === true && $userRole != 'admin') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= TITLE ?> | Categories</title>
+    <title><?= TITLE ?> | Services</title>
     <?php include './includes/css_links.php'; ?>
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
@@ -23,7 +23,7 @@ if (isLoggedin() === true && $userRole != 'admin') {
             <div class="container my-5">
                 <div class="row">
                     <div class="col-12 text-center">
-                        <h1><?= TITLE ?> | Categories</h1>
+                        <h1><?= TITLE ?> | Services</h1>
                     </div>
                     <div class="col-10 col-md-3 mx-auto">
                         <?php
@@ -35,13 +35,13 @@ if (isLoggedin() === true && $userRole != 'admin') {
                             <div class="row">
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
-                                        <label for="category_name">Category Name</label>
+                                        <label for="category_name">Service Name</label>
                                         <input type="text" name="category_name" id="category_name" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
                                     <div class="form-group d-flex justify-content-center justify-content-md-end">
-                                        <button type="submit" name="submit" id="submit" class="btn btn-primary">Add Category</button>
+                                        <button type="submit" name="submit" id="submit" class="btn btn-primary">Add Service</button>
                                     </div>
                                 </div>
                             </div>
@@ -60,12 +60,12 @@ if (isLoggedin() === true && $userRole != 'admin') {
                             </thead>
                             <tbody>
                                 <?php
-                                $cat_filter_ = $db->query("SELECT * FROM `categories`");
+                                $cat_filter_ = $db->query("SELECT * FROM `services`");
                                 while ($cat_ = mysqli_fetch_object($cat_filter_)) :
                                 ?>
                                     <tr>
                                         <td><?= $cat_->id ?></td>
-                                        <td><?= $cat_->category_name ?></td>
+                                        <td><?= $cat_->service_name ?></td>
                                         <td>
                                             <a href="edit_category.php?id=<?= $cat_->id ?>" class="btn btn-primary">Edit</a>
                                             <a href="#!" data-id="<?= $cat_->id ?>" class="btn btn-danger del-cat">Delete</a>

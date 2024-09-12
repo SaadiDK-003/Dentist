@@ -229,8 +229,17 @@ function Add_Cafe($POST, $userID)
 
 function edit_user($POST)
 {
+
     global $db;
     $pwd = '';
+    $response = '';
+    $diseases = null;
+    $certificate = null;
+    $experience = null;
+    $checkin_time = null;
+    $checkout_time = null;
+    $weekend = 'no';
+
     $old_owd = $POST['old_pwd'];
     $password =  $POST['password'];
 
@@ -238,6 +247,10 @@ function edit_user($POST)
     $name =  $POST['name'];
     $email =  $POST['email'];
     $phone =  $POST['phone'];
+    $dob =  $POST['dob'];
+    $gender =  $POST['gender'];
+    $user_type_ = $POST['user_role'];
+
 
     if ($password == '') {
         $pwd = $old_owd;
@@ -245,10 +258,19 @@ function edit_user($POST)
         $pwd = md5($password);
     }
 
-    $upd_Q = $db->query("UPDATE `users` SET `name`='$name', `email`='$email', `password`='$pwd', `phone`='$phone' WHERE `id`='$user_id'");
+
+    if ($user_type_ == 'patient') {
+        $diseases = $POST['diseases'];
+        $upd_Q = $db->query("UPDATE `users` SET `name`='$name', `email`='$email', `password`='$pwd', `phone`='$phone', `diseases`='$diseases', `dob`='$dob', `gender`='$gender' WHERE `id`='$user_id'");
+    } else {
+        $certificate = $POST['certificate'];
+        $experience = $POST['experience'];
+        $upd_Q = $db->query("UPDATE `users` SET `name`='$name', `email`='$email', `password`='$pwd', `phone`='$phone', `dob`='$dob', `gender`='$gender', `certificate`='$certificate', `experience`='$experience' WHERE `id`='$user_id'");
+    }
+
 
     if ($upd_Q) {
-        echo '<h6 class="text-center alert alert-success">' . $name . ' has been updated successfully.</h6>
+        echo '<h6 class="text-center alert alert-success">' . $user_type_ . ' has been updated successfully.</h6>
         <script>
         setTimeout(function(){
             window.location.href = "./adminDashboard.php";
@@ -296,7 +318,7 @@ function add_category($POST)
         return '<h6 class="text-center alert alert-success">' . $cat_name . ' has been added.</h6>
         <script>
         setTimeout(function(){
-            window.location.href = "./add_categories.php";
+            window.location.href = "./add_services.php";
         },1800);
         </script>
         ';
@@ -312,7 +334,7 @@ function edit_category($POST)
         return '<h6 class="text-center alert alert-success">' . $cat_name . ' has been updated.</h6>
         <script>
         setTimeout(function(){
-            window.location.href = "./add_categories.php";
+            window.location.href = "./add_services.php";
         },1800);
         </script>
         ';

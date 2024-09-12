@@ -171,7 +171,13 @@ if (isLoggedin() === true) {
                                     <div class="col-12 col-md-6 mb-3">
                                         <div class="form-group">
                                             <label for="certificate">Certificate</label>
-                                            <input type="text" name="certificate" id="certificate" class="form-control" required>
+                                            <select name="certificate" id="certificate" class="form-select" required>
+                                                <?php $get_services_Q = $db->query("SELECT * FROM `services`");
+                                                while ($get_services = mysqli_fetch_object($get_services_Q)):
+                                                ?>
+                                                    <option value="<?= $get_services->service_name ?>"><?= $get_services->service_name ?></option>
+                                                <?php endwhile; ?>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6 mb-3">

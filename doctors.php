@@ -153,11 +153,11 @@ require_once './core/database.php';
             <div class="row justify-content-center">
                 <div class="col-12 col-md-4">
                     <select class="form-select" name="specialist" id="specialist">
-                        <option value="" selected hidden>Select Specialties</option>
-                        <option value="BDS">BDS</option>
-                        <option value="RDS">RDS</option>
-                        <option value="MCPS-R">MCPS-R</option>
-                        <option value="BDS, RDS, MCPS-R(Oral surgery)">BDS, RDS, MCPS-R(Oral surgery)</option>
+                        <?php $get_services_Q = $db->query("SELECT * FROM `services`");
+                        while ($get_services = mysqli_fetch_object($get_services_Q)):
+                        ?>
+                            <option value="<?= $get_services->service_name ?>"><?= $get_services->service_name ?></option>
+                        <?php endwhile; ?>
                     </select>
                 </div>
 

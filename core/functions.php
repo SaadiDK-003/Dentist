@@ -309,27 +309,67 @@ function add_user($POST)
 }
 
 
-function add_category($POST)
+function add_category($POST, $FILE)
 {
     global $db;
+    $targetDir = './img/prod/';
+    $statusMsg = '';
     $cat_name = $POST['category_name'];
-    $add_cat_Q = $db->query("INSERT INTO `categories` (category_name,status) VALUES('$cat_name','1')");
-    if ($add_cat_Q) {
-        return '<h6 class="text-center alert alert-success">' . $cat_name . ' has been added.</h6>
-        <script>
-        setTimeout(function(){
-            window.location.href = "./add_services.php";
-        },1800);
-        </script>
-        ';
+    if (!empty($FILE["service_image"]["name"])) {
+
+        $fileName = basename($FILE["service_image"]["name"]);
+        $targetFilePath = $targetDir . $fileName;
+        $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+        //allow certain file formats
+        $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'webp');
+        if (in_array($fileType, $allowTypes)) {
+            //upload file to server
+            if (move_uploaded_file($FILE["service_image"]["tmp_name"], $targetFilePath)) {
+
+                $add_cat_Q = $db->query("INSERT INTO `services` (service_name,status,img) VALUES('$cat_name','1','$targetFilePath')");
+
+                if ($add_cat_Q) {
+
+                    $statusMsg = '<h6 class="alert alert-success w-75 text-center mx-auto">Service has been Added Successfully.</h6>
+                    <script>
+                        setTimeout(function(){
+                            window.location.href = "./doctorDashboard.php";
+                        },1800);
+                    </script>
+                    ';
+                } else {
+                    $statusMsg = "Something went wrong!";
+                }
+            } else {
+                $statusMsg = "Sorry, there was an error uploading your file.";
+            }
+        } else {
+            $statusMsg = '<h6 class="alert alert-danger w-75 text-center mx-auto">Sorry, only JPG, JPEG, PNG & GIF files are allowed to upload.</h6>';
+        }
+    } else {
+
+        $statusMsg = '<h6 class="alert alert-success w-50 text-center mx-auto">Please select a file to upload.</h6>';
     }
+
+
+    return $statusMsg;
+    // if ($add_cat_Q) {
+    //     return '<h6 class="text-center alert alert-success">' . $cat_name . ' has been added.</h6>
+    //     <script>
+    //     setTimeout(function(){
+    //         window.location.href = "./add_services.php";
+    //     },1800);
+    //     </script>
+    //     ';
+    // }
 }
-function edit_category($POST)
+function edit_service($POST)
 {
     global $db;
-    $cat_name = $POST['category_name'];
+    $cat_name = $POST['service_name'];
     $editCat_ID = $POST['editCat_ID'];
-    $add_cat_Q = $db->query("UPDATE `categories` SET `category_name`='$cat_name' WHERE `id`='$editCat_ID'");
+    $add_cat_Q = $db->query("UPDATE `services` SET `service_name`='$cat_name' WHERE `id`='$editCat_ID'");
     if ($add_cat_Q) {
         return '<h6 class="text-center alert alert-success">' . $cat_name . ' has been updated.</h6>
         <script>

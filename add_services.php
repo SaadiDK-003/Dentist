@@ -28,15 +28,21 @@ if (isLoggedin() === true && $userRole != 'admin') {
                     <div class="col-10 col-md-3 mx-auto">
                         <?php
                         if (isset($_POST['submit'])) :
-                            echo add_category($_POST);
+                            echo add_category($_POST, $_FILES);
                         ?>
                         <?php endif; ?>
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <div class="row">
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="category_name">Service Name</label>
                                         <input type="text" name="category_name" id="category_name" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div class="form-group">
+                                        <label for="service-image">Service Image</label>
+                                        <input type="file" name="service_image" id="service-image" class="form-control" required>
                                     </div>
                                 </div>
                                 <div class="col-12 mb-3">
@@ -55,6 +61,7 @@ if (isLoggedin() === true && $userRole != 'admin') {
                                 <tr>
                                     <th>#</th>
                                     <th>Category Name</th>
+                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -66,8 +73,9 @@ if (isLoggedin() === true && $userRole != 'admin') {
                                     <tr>
                                         <td><?= $cat_->id ?></td>
                                         <td><?= $cat_->service_name ?></td>
+                                        <td><img src="<?= $cat_->img ?>" class="mx-auto" alt="service" width="50" height="50"></td>
                                         <td>
-                                            <a href="edit_category.php?id=<?= $cat_->id ?>" class="btn btn-primary">Edit</a>
+                                            <a href="edit_service.php?id=<?= $cat_->id ?>" class="btn btn-primary">Edit</a>
                                             <a href="#!" data-id="<?= $cat_->id ?>" class="btn btn-danger del-cat">Delete</a>
                                         </td>
                                     </tr>
@@ -79,6 +87,7 @@ if (isLoggedin() === true && $userRole != 'admin') {
                                 <tr>
                                     <th>#</th>
                                     <th>Category Name</th>
+                                    <th>Image</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>

@@ -3,11 +3,11 @@ require_once './core/database.php';
 if (isLoggedin() === true && $userRole != 'admin') {
     header('Location: ./');
 }
-$edit_cat_id = 0;
+$edit_service = 0;
 if (isset($_GET['id'])) {
-    $edit_cat_id = $_GET['id'];
+    $edit_service = $_GET['id'];
 }
-$editCat_Q = $db->query("SELECT * FROM `categories` WHERE `id`='$edit_cat_id'");
+$editCat_Q = $db->query("SELECT * FROM `services` WHERE `id`='$edit_service'");
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ $editCat_Q = $db->query("SELECT * FROM `categories` WHERE `id`='$edit_cat_id'");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= TITLE ?> | Edit Category</title>
+    <title><?= TITLE ?> | Edit Service</title>
     <?php include './includes/css_links.php'; ?>
     <link rel="stylesheet" href="./css/style.min.css">
 </head>
@@ -31,26 +31,26 @@ $editCat_Q = $db->query("SELECT * FROM `categories` WHERE `id`='$edit_cat_id'");
                 ?>
                     <div class="row">
                         <div class="col-12 text-center">
-                            <h1><?= TITLE ?> | Edit Category</h1>
+                            <h1><?= TITLE ?> | Edit Service</h1>
                         </div>
                         <div class="col-10 col-md-3 mx-auto">
                             <?php
                             if (isset($_POST['submit'])) :
-                                echo edit_category($_POST);
+                                echo edit_service($_POST);
                             ?>
                             <?php endif; ?>
                             <form action="" method="post">
                                 <div class="row">
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
-                                            <label for="category_name">Category Name</label>
-                                            <input type="text" name="category_name" value="<?= $editCat_->category_name ?>" id="category_name" class="form-control" required>
+                                            <label for="service-name">Service Name</label>
+                                            <input type="text" name="service_name" value="<?= $editCat_->service_name ?>" id="service-name" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-12 mb-3">
                                         <div class="form-group d-flex justify-content-center justify-content-md-end">
                                             <input type="hidden" name="editCat_ID" value="<?= $editCat_->id ?>">
-                                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Edit Category</button>
+                                            <button type="submit" name="submit" id="submit" class="btn btn-primary">Edit Service</button>
                                         </div>
                                     </div>
                                 </div>

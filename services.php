@@ -12,17 +12,17 @@ require_once 'core/database.php';
     <link rel="stylesheet" href="./css/style.min.css">
     <style>
         /* Section Styles */
-        .image-container {
+        /* .image-container {
             background-color: #005772;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Full height of the viewport */
+            height: 100vh; 
             text-align: center;
             color: white;
             padding: 20px;
-        }
+        } */
 
         /* Image Styles */
         .image-container img {
@@ -52,26 +52,56 @@ require_once 'core/database.php';
         <section class="hero __about">
             <div class="container">
                 <div class="content hero-about-content">
-                <h4 class="bg-primary-custom text-white px-5 py-3 rounded-3 fs-1">Services</h4>
+                    <h4 class="bg-primary-custom text-white px-5 py-3 rounded-3 fs-1">Services</h4>
+                </div>
+            </div>
+        </section>
+        <section class="services">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 my-5">
+                        <div class="owl-carousel">
+                            <?php
+                            $service_Q = $db->query("SELECT * FROM `services`");
+                            while ($list_service = mysqli_fetch_object($service_Q)):
+                            ?>
+                                <div class="image-container">
+                                    <img width="230" height="300" src="<?= $list_service->img ?>" alt="<?= $list_service->service_name ?>">
+                                    <h4 class="text-center mt-3"><?= $list_service->service_name ?></h4>
+                                </div>
+                            <?php endwhile; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-    <div class="image-container">
-        <img src="./img/dentalaestheticfillings.jpg" alt="Dental Aesthetic Fillings">
-        <h3>Dental Aesthetic Fillings</h3>
-    </div>
-    <div class="image-container">
-        <img src="./img/GumDiseaseTreatment.jpg" alt="Gum Disease Treatment">
-        <h3>Gum Disease Treatment</h3>
-    </div>
-    <div class="image-container">
-        <img src="./img/DecayTreatment.jpg" alt="Tooth Decay">
-        <h3>Tooth Decay</h3>
-    </div>
     <footer></footer>
 
 
     <?php include './includes/js_links.php'; ?>
+    <script>
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                autoplay: true,
+                nav: false,
+                dots: false,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    }
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>

@@ -226,6 +226,51 @@ function Add_Cafe($POST, $userID)
     return $msg;
 }
 
+function profile_pic($POST, $FILE)
+{
+    $targetDir = './img/prod/';
+    global $db;
+    $statusMsg = '';
+    $profile_id = $POST['profile_id'];
+    if (!empty($FILE["profile_pic"]["name"])) {
+
+        $fileName = basename($FILE["profile_pic"]["name"]);
+        $targetFilePath = $targetDir . $fileName;
+        $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+        //allow certain file formats
+        $allowTypes = array('jpg', 'png', 'jpeg', 'gif', 'webp');
+        if (in_array($fileType, $allowTypes)) {
+            //upload file to server
+            if (move_uploaded_file($FILE["profile_pic"]["tmp_name"], $targetFilePath)) {
+
+                $prod_Q = $db->query("UPDATE `users` SET `profile_pic`='$targetFilePath' WHERE `id`='$profile_id'");
+
+                if ($prod_Q) {
+
+                    $statusMsg = '<h6 class="alert alert-success w-75 text-center mx-auto">Profile Picture Updated.</h6>
+                    <script>
+                        setTimeout(function(){
+                            window.location.href = "./doctorDashboard.php";
+                        },1800);
+                    </script>
+                    ';
+                } else {
+                    $statusMsg = "Something went wrong!";
+                }
+            } else {
+                $statusMsg = "Sorry, there was an error uploading your file.";
+            }
+        } else {
+            $statusMsg = '<h6 class="alert alert-danger w-75 text-center mx-auto">Sorry, only JPG, JPEG, PNG & GIF files are allowed to upload.</h6>';
+        }
+    } else {
+
+        $statusMsg = '<h6 class="alert alert-success w-50 text-center mx-auto">Please select a file to upload.</h6>';
+    }
+
+    return $statusMsg;
+}
 
 function edit_user($POST)
 {

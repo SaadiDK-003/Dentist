@@ -78,13 +78,26 @@ endif;
             position: relative;
         }
 
-        .buttons-wrapper a:first-child::before {
+        .buttons-wrapper a i {
+            left: -30px;
+            font-size: 20px;
+        }
+
+        .buttons-wrapper a:first-child i {
+            color: #198754;
+        }
+
+        .buttons-wrapper a:last-child i {
+            color: #0d6efd;
+        }
+
+        /* .buttons-wrapper a:first-child::before {
             content: 'Clinic: ';
             position: absolute;
             left: -55px;
             color: #000;
             font-weight: bold;
-        }
+        } */
 
         /* Contact Info Section */
         .contact-info {
@@ -222,8 +235,10 @@ endif;
                     <p><?= $docInfo->certificate ?></p>
                     <p><?= $docInfo->city ?></p>
                     <div class="buttons-wrapper">
-                        <a href="tel:<?= $docInfo->clinic_number ?>" class="btn btn-success"><?= $docInfo->clinic_number ?></a>
-                        <a href="./appointment.php" class="btn btn-primary">Appointment Form</a>
+                        <a href="tel:<?= $docInfo->clinic_number ?>" class="btn btn-success">
+                            <i class="fas fa-phone d-inline-block me-2 position-absolute"></i>
+                            <?= $docInfo->clinic_number ?></a>
+                        <a href="./appointment.php" class="btn btn-primary"><i class="far fa-calendar d-inline-block me-2 position-absolute"></i>Appointment Form</a>
                     </div>
                 </div>
             </div>
@@ -231,9 +246,9 @@ endif;
             <!-- Contact Info Section -->
             <div class="contact-info">
                 <h3>Contact Information</h3>
-                <p>Email: <?= $docInfo->email ?></p>
-                <p>Phone: <?= $docInfo->phone ?></p>
-                <p>Address: <?= $docInfo->clinic_location ?></p>
+                <p><i class="fas fa-envelope"></i> <?= $docInfo->email ?></p>
+                <p><i class="fas fa-phone"></i> <?= $docInfo->phone ?></p>
+                <p><i class="fas fa-location-dot"></i> <?= $docInfo->clinic_location ?></p>
             </div>
 
             <!-- Availability Section -->

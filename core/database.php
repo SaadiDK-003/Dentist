@@ -10,6 +10,7 @@ $userEmail = '';
 $userPhone = '';
 $userRole = '';
 $clinic__ID = '';
+$profile_PIC = '';
 if (isset($_SESSION['user'])) {
     $userID = $_SESSION['user'];
     $getUserQ = $db->query("SELECT * FROM `users` WHERE `id`='$userID'");
@@ -19,6 +20,7 @@ if (isset($_SESSION['user'])) {
     $userPhone = $userData->phone;
     $userRole = $userData->role;
     $clinic_ID = $userData->clinic_id;
+    $profile_PIC = $userData->profile_pic;
 
     if ($userRole == 'doctor') {
         $getCafeQ = $db->query("SELECT * FROM `clinic` WHERE `id`='$clinic_ID'");

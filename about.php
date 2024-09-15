@@ -7,7 +7,7 @@ require_once 'core/database.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= TITLE ?> | About</title>
+    <title><?= TITLE ?> | Services</title>
     <?php include './includes/css_links.php'; ?>
     <link rel="stylesheet" href="./css/style.min.css">
     <style>
@@ -50,15 +50,25 @@ require_once 'core/database.php';
                             <!-- Dropdown List -->
                             <select id="city" name="city" class="form-select mb-3">
                                 <option value="all">Choose the Area</option>
-                                <option value="riyadh">Riyadh</option>
-                                <option value="baha">Baha</option>
-                                <option value="biesha">Biesha</option>
-                                <option value="makkah">Makkah</option>
+                                <option value="Riyadh">Riyadh</option>
+                                <option value="Baha">Baha</option>
+                                <option value="Biesha">Biesha</option>
+                                <option value="Makkah">Makkah</option>
                             </select>
                             <!-- Text Box -->
-                            <select id="search_clinic" name="search_clinic" class="form-select mb-3" disabled>
-                                <option value="" selected hidden>Select Clinic</option>
+
+                            <select class="form-select mb-3" name="specialist" id="specialist" required>
+                                <option value="" selected hidden>Select City</option>
+                                <?php $get_services_Q = $db->query("SELECT * FROM `services`");
+                                while ($get_services = mysqli_fetch_object($get_services_Q)):
+                                ?>
+                                    <option value="<?= $get_services->service_name ?>"><?= $get_services->service_name ?></option>
+                                <?php endwhile; ?>
                             </select>
+
+                            <!-- <select id="search_clinic" name="search_clinic" class="form-select mb-3" disabled>
+                                <option value="" selected hidden>Select Clinic</option>
+                            </select> -->
 
 
                             <!-- Search Button -->
@@ -83,42 +93,65 @@ require_once 'core/database.php';
                 e.preventDefault();
                 let city = $(this).val();
 
-                $.ajax({
-                    url: 'ajax/clinic_info.php',
-                    method: 'post',
-                    data: {
-                        city: city
-                    },
-                    beforeSend: function() {
-                        $("#search_clinic").children().remove();
-                    },
-                    success: function(res) {
-                        $("#search_clinic").append(res);
-                        if ($("#search_clinic").children('option').length > 0) {
-                            $("#search_clinic, #search-clinic-btn").removeAttr('disabled');
-                        } else {
-                            $("#search_clinic, #search-clinic-btn").attr('disabled', true);
-                        }
-                    }
+                // $.ajax({
+                //     url: 'ajax/clinic_info.php',
+                //     method: 'post',
+                //     data: {
+                //         city: city
+                //     },
+                //     beforeSend: function() {
+                //         $("#search_clinic").children().remove();
+                //     },
+                //     success: function(res) {
+                //         $("#search_clinic").append(res);
+                //         if ($("#search_clinic").children('option').length > 0) {
+                //             $("#search_clinic, #search-clinic-btn").removeAttr('disabled');
+                //         } else {
+                //             $("#search_clinic, #search-clinic-btn").attr('disabled', true);
+                //         }
+                //     }
+                // });
+
+                // $(document).on('click', '#search-clinic-btn', function(e) {
+                //     e.preventDefault();
+                //     let clinic_id = $("#search_clinic").val();
+                //     console.log(clinic_id);
+
+                //     $.ajax({
+                //         url: 'ajax/clinic_info.php',
+                //         method: 'post',
+                //         data: {
+                //             clinic_id: clinic_id
+                //         },
+                //         success: function(res) {
+                //             $("#render_list").html(res);
+                //         }
+                //     });
+
+                // });
+
+                $(document).on('change', '#specialist', function(e) {
+                    e.preventDefault();
+                    $("#search-clinic-btn").removeAttr('disabled');
                 });
 
                 $(document).on('click', '#search-clinic-btn', function(e) {
                     e.preventDefault();
-                    let clinic_id = $("#search_clinic").val();
-                    console.log(clinic_id);
+                    let specialist = $("#specialist").val();
+                    let city = $("#city").val();
 
                     $.ajax({
                         url: 'ajax/clinic_info.php',
                         method: 'post',
                         data: {
-                            clinic_id: clinic_id
+                            specialist: specialist,
+                            city: city
                         },
                         success: function(res) {
                             $("#render_list").html(res);
                         }
                     });
-
-                });
+                })
 
             });
 

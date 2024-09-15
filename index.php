@@ -45,7 +45,7 @@ require_once 'core/database.php';
                                         <div class="review-card border border-2 rounded-2 p-4">
                                             <div class="users-name position-relative">
                                                 <h6><?= $reviews->name ?></h6>
-                                                <h5 class="position-absolute btn btn-secondary"><?= $reviews->clinic_name ?></h5>
+                                                <h5 class="position-absolute btn btn-secondary d-none"><?= $reviews->clinic_name ?></h5>
                                             </div>
                                             <div class="ratings mb-2 <?= 'rate-' . $reviews->rating ?>">
                                                 <i class="fas fa-star"></i>

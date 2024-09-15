@@ -194,7 +194,7 @@ require_once './core/database.php';
         ?>
 
             <div class="doctor-card">
-                <img src="./img/doc.jpg" alt="Doctor Photo">
+                <img src="<?= $spe_list->profile_pic ?? './img/doc.jpg'; ?>" alt="Doctor Photo">
                 <h3><?= $spe_list->name ?></h3>
                 <p><?= $spe_list->certificate ?> | <?= $spe_list->city ?></p>
 

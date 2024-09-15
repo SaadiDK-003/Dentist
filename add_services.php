@@ -60,7 +60,7 @@ if (isLoggedin() === true && $userRole != 'admin') {
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Category Name</th>
+                                    <th>Service Name</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>
@@ -86,7 +86,7 @@ if (isLoggedin() === true && $userRole != 'admin') {
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>Category Name</th>
+                                    <th>Service Name</th>
                                     <th>Image</th>
                                     <th>Action</th>
                                 </tr>

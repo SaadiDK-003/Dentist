@@ -66,7 +66,7 @@ require_once 'core/database.php';
                             while ($list_service = mysqli_fetch_object($service_Q)):
                             ?>
                                 <div class="image-container">
-                                    <img width="230" height="300" src="<?= $list_service->img ?>" alt="<?= $list_service->service_name ?>">
+                                    <img width="230" height="600" src="<?= $list_service->img ?>" alt="<?= $list_service->service_name ?>">
                                     <h4 class="text-center mt-3"><?= $list_service->service_name ?></h4>
                                 </div>
                             <?php endwhile; ?>
@@ -85,18 +85,18 @@ require_once 'core/database.php';
             $('.owl-carousel').owlCarousel({
                 loop: true,
                 margin: 10,
-                autoplay: true,
-                nav: false,
+                autoplay: false,
+                nav: true,
                 dots: false,
                 responsive: {
                     0: {
                         items: 1
                     },
                     600: {
-                        items: 2
+                        items: 1
                     },
                     1000: {
-                        items: 3
+                        items: 1
                     }
                 }
             });

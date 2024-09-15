@@ -176,6 +176,9 @@ body .edit-profile-btn {
   top: 0;
   right: 10px;
 }
+body .edit-profile-btn.edit-profile-pic {
+  top: 45px;
+}
 body main section {
   position: relative;
 }

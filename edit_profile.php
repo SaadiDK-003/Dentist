@@ -21,8 +21,10 @@ if (isLoggedin() === false) {
     <main>
         <?php
         $getID = 0;
+        $role_check = '';
         if (isset($_GET['u_id'])) {
             $getID = $_GET['u_id'];
+            $role_check = $_GET['role_check'] ?? '';
             $usr_Q = $db->query("SELECT * FROM `users` WHERE `id`='$getID'");
         ?>
             <section class="edit_users">
@@ -76,7 +78,7 @@ if (isLoggedin() === false) {
                                                 </select>
                                             </div>
                                         </div>
-                                        <?php if ($clinic__ID != ''): ?>
+                                        <?php if ($clinic__ID != '' || $role_check == 'doctor'): ?>
                                             <div class="col-12 col-md-6 mb-3">
                                                 <div class="form-group">
                                                     <label for="certificate">Certificate</label>
@@ -116,7 +118,7 @@ if (isLoggedin() === false) {
                                         <div class="col-12 col-md-12 mb-3 d-flex align-items-end">
                                             <input type="hidden" name="user_id" value="<?= $edit_data->id ?>">
                                             <input type="hidden" name="old_pwd" value="<?= $edit_data->password ?>">
-                                            <input type="hidden" name="user_role" value="<?= $userRole ?>">
+                                            <input type="hidden" name="user_role" value="<?= ($userRole == 'admin' ? $role_check : $userRole) ?>">
                                             <div class="form-group d-flex justify-content-center justify-content-md-end w-100">
                                                 <button type="submit" name="submit" id="submit" class="btn btn-primary">Update</button>
                                             </div>

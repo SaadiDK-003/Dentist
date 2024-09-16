@@ -55,7 +55,7 @@ if (isLoggedin() === false || $userRole != 'admin') {
                                         <td><?= $getRow->name ?></td>
                                         <td><?= $getRow->email ?></td>
                                         <td><?= $getRow->role ?></td>
-                                        <td><a href="edit_users.php?id=<?= $getRow->id ?>" class="btn btn-secondary btn-sm">Edit</a>
+                                        <td><a href="edit_profile.php?u_id=<?= $getRow->id ?>&role_check=<?= $getRow->role ?>" class="btn btn-secondary btn-sm">Edit</a>
                                             <a href="#!" class="btn btn-danger btn-sm del-id" data-id="<?= $getRow->id ?>">Delete</a>
                                         </td>
                                     </tr>

@@ -45,7 +45,7 @@ endif;
         .profile img {
             width: 150px;
             height: 150px;
-            border-radius: 50%;
+            /* border-radius: 50%; */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
@@ -229,7 +229,7 @@ endif;
         ?>
             <!-- Doctor Profile Section -->
             <div class="profile">
-                <img src="./img/doc.jpg" alt="Doctor Photo">
+                <img src="<?= $docInfo->profile_pic ?? './img/doc.jpg' ?>" alt="Doctor Photo">
                 <div class="profile-info">
                     <h2><?= $docInfo->name ?></h2>
                     <p><?= $docInfo->certificate ?></p>

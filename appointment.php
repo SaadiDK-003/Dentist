@@ -159,7 +159,7 @@ if (isLoggedin() === false) {
                     // If the form is valid, you can proceed with form submission or other actions
                     let formData = $("#reservation-form").serialize();
                     $.ajax({
-                        url: "ajax/reservationForm.php",
+                        url: "ajax/appointmentForm.php",
                         method: "POST",
                         data: formData,
                         success: function(response) {

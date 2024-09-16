@@ -200,7 +200,6 @@ if (isLoggedin() === false || $userRole == 'patient') {
                                 <label for="r_status">Status</label>
                                 <select name="r_status" id="r_status" class="form-select" required>
                                     <option value="" selected hidden>Select Status</option>
-                                    <option value="reserved">Reserved</option>
                                     <option value="completed">Completed</option>
                                     <option value="cancel">Cancel</option>
                                 </select>
@@ -266,7 +265,7 @@ if (isLoggedin() === false || $userRole == 'patient') {
                 e.preventDefault();
                 let formData = $(this).serialize();
                 $.ajax({
-                    url: 'ajax/update_reservation.php',
+                    url: 'ajax/update_appointment.php',
                     method: 'post',
                     data: formData,
                     success: function(response) {

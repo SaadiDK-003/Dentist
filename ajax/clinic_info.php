@@ -53,7 +53,7 @@ if (isset($_POST['specialist']) && isset($_POST['city']) && !isset($_POST['clini
                 <h6 class="d-none"><?= $list->clinic_location ?></h6>
                 <div class="doctor_info">
                     <div class="avatar mt-2 mb-4">
-                        <img src="img/doc.jpg" alt="">
+                        <img src="<?= $list->profile_pic ?? 'img/doc.jpg' ?>" alt="">
                     </div>
                     <h5><?= $list->name ?></h5>
                     <div class="about_doctor d-flex flex-column">

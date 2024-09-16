@@ -3,11 +3,11 @@ require_once './core/database.php';
 if (isLoggedin() === false) {
     header('Location: ./login.php');
 }
-$cafe_id = 0;
-$cafe_name = '';
-if (isset($_GET['cafe_id']) && isset($_GET['cafe_name'])) {
-    $cafe_id = $_GET['cafe_id'];
-    $cafe_name = $_GET['cafe_name'];
+$doc_id = 0;
+$doc_name = '';
+if (isset($_GET['doc_id']) && isset($_GET['doc_name'])) {
+    $doc_id = $_GET['doc_id'];
+    $doc_name = $_GET['doc_name'];
 }
 ?>
 
@@ -29,10 +29,10 @@ if (isset($_GET['cafe_id']) && isset($_GET['cafe_name'])) {
             <div class="container my-5">
                 <div class="row">
                     <?php
-                    $prod_Q = $db->query("CALL `get_all_products_by_cafe_id`($cafe_id)");
+                    $prod_Q = $db->query("CALL `get_all_products_by_cafe_id`($doc_id)");
                     if (mysqli_num_rows($prod_Q) > 0) : ?>
                         <div class="col-12">
-                            <h3 class="text-center mb-3"><?= $cafe_name ?></h3>
+                            <h3 class="text-center mb-3"><?= $doc_name ?></h3>
                         </div>
                         <?php
                         while ($list_p = mysqli_fetch_object($prod_Q)) :

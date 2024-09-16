@@ -72,7 +72,7 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                                             <?php elseif ($getRow->r_status == 'reserved') : ?>
                                                 -
                                             <?php else : ?>
-                                                <a href="edit_reservation.php?id=<?= $getRow->r_id ?>" class="btn btn-primary btn-sm edit-info">Edit</a>
+                                                <a href="edit_appointment.php?id=<?= $getRow->r_id ?>" class="btn btn-primary btn-sm edit-info">Edit</a>
                                                 <a href="#!" data-id="<?= $getRow->r_id ?>" class="btn btn-danger btn-sm del-info">Delete</a>
                                             <?php endif; ?>
                                         </td>
@@ -140,7 +140,7 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                                             <?php elseif ($getRow->r_status == 'reserved') : ?>
                                                 -
                                             <?php else : ?>
-                                                <a href="edit_reservation.php?id=<?= $getRow->r_id ?>" class="btn btn-primary btn-sm edit-info">Edit</a>
+                                                <a href="edit_appointment.php?id=<?= $getRow->r_id ?>" class="btn btn-primary btn-sm edit-info">Edit</a>
                                                 <a href="#!" data-id="<?= $getRow->r_id ?>" class="btn btn-danger btn-sm del-info">Delete</a>
                                             <?php endif; ?>
                                         </td>
@@ -173,7 +173,7 @@ if (isLoggedin() === false || $userRole == 'doctor') {
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title cafeName" id="cafeInfoModalLabel"></h5>
+                    <h5 class="modal-title cafeName" id="cafeInfoModalLabel">Service Info</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -246,7 +246,7 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                     },
                     success: function(response) {
                         let res = JSON.parse(response);
-                        $(".cafeName").html(res.cafeName);
+                        // $(".cafeName").html(res.cafeName);
                         $("#ownerName").html(res.ownerName);
                         $("#ownerPhone").html(res.ownerPhone);
                         $("#shopLocation").html(res.shopLocation);
@@ -261,7 +261,7 @@ if (isLoggedin() === false || $userRole == 'doctor') {
                 let id = $(this).data('id');
 
                 $.ajax({
-                    url: 'ajax/reservationForm.php',
+                    url: 'ajax/appointmentForm.php',
                     method: 'post',
                     data: {
                         del_res: id

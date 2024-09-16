@@ -76,7 +76,7 @@ if (isLoggedin() === true && $userRole != 'admin') {
                                         <td><img src="<?= $cat_->img ?>" class="mx-auto" alt="service" width="50" height="50"></td>
                                         <td>
                                             <a href="edit_service.php?id=<?= $cat_->id ?>" class="btn btn-primary">Edit</a>
-                                            <a href="#!" data-id="<?= $cat_->id ?>" class="btn btn-danger del-cat">Delete</a>
+                                            <a href="#!" data-id="<?= $cat_->id ?>" class="btn btn-danger del-service">Delete</a>
                                         </td>
                                     </tr>
                                 <?php
@@ -111,14 +111,14 @@ if (isLoggedin() === true && $userRole != 'admin') {
     <?php include './includes/js_links.php'; ?>
     <script>
         $(document).ready(function() {
-            $(document).on('click', '.del-cat', function(e) {
+            $(document).on('click', '.del-service', function(e) {
                 e.preventDefault();
                 let id = $(this).data('id');
                 $.ajax({
-                    url: 'ajax/del_cat.php',
+                    url: 'ajax/del_service.php',
                     method: 'post',
                     data: {
-                        del_cat: id
+                        del_service: id
                     },
                     success: function(response) {
                         let res = JSON.parse(response);

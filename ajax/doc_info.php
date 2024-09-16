@@ -36,7 +36,7 @@ if (isset($_POST['docID'])) :
                 <div class="text"><span class="d-block fw-bold">Clinic Name</span><?= $doc_data->clinic_name ?></div>
                 <div class="text"><span class="d-block fw-bold">Clinic Location</span><?= $doc_data->clinic_location ?></div>
                 <div class="text d-none">
-                    <a class="btn btn-primary btn-sm" href="./cafe_menu.php?cafe_id=<?= $docID ?>&cafe_name=<?= $doc_data->clinic_name ?>" target="_blank">Clinic</a>
+                    <a class="btn btn-primary btn-sm" href="./doctor_info.php?doc_id=<?= $docID ?>&doc_name=<?= $doc_data->clinic_name ?>" target="_blank">Clinic</a>
                 </div>
             </div>
         <?php endif; ?>

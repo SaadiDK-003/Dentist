@@ -7,7 +7,7 @@ require_once 'core/database.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= TITLE ?> | Services</title>
+    <title><?= TITLE ?> | Search</title>
     <?php include './includes/css_links.php'; ?>
     <link rel="stylesheet" href="./css/style.min.css">
     <style>
@@ -31,8 +31,8 @@ require_once 'core/database.php';
         <section class="hero">
             <div class="container">
                 <div class="content hero-about-content">
-                    <h1>About</h1>
-                    <h1>Welcome To Our My Doctor Clinic</h1>
+                    <h1>Search</h1>
+                    <!-- <h1>Welcome To Our My Doctor Clinic</h1> -->
                     <!-- <a href="#findClinicForm" class="btn btn-secondary btn-lg btn-block">Find A Clinic</a> -->
                 </div>
             </div>

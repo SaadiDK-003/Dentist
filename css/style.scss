@@ -419,6 +419,25 @@ body {
       }
     }
   }
+  .owl-carousel {
+    .owl-nav {
+      button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        span {
+          font-size: 60px;
+          color: var(--dark-blue);
+        }
+        &.owl-prev {
+          left: -40px;
+        }
+        &.owl-next {
+          right: -40px;
+        }
+      }
+    }
+  }
 }
 
 @keyframes text_reval {

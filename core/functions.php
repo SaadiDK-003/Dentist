@@ -44,6 +44,7 @@ function register($POST)
     $user_type = $POST['user_type'];
     $dob = $POST['dob'];
     $gender = $POST['gender'];
+    $city = $POST['city'];
     // EMPTY VARIABLES
     $response = '';
     $user_type_ = '';
@@ -83,7 +84,7 @@ function register($POST)
                     $response = '<h6 class="text-center alert alert-danger">Password & Confirm Password do not match.</h6>';
                 else :
                     $pwd = md5($pwd);
-                    $insertQ = $db->query("INSERT INTO `users` (name,username,email,password,phone,diseases,certificate,experience,role,clinic_id,checkin_time,checkout_time,weekend_available,dob,gender) VALUES('$name','$username','$email','$pwd','$phone','$diseases','$certificate','$experience','$user_type','1','$checkin_time','$checkout_time','$weekend','$dob','$gender')");
+                    $insertQ = $db->query("INSERT INTO `users` (name,username,email,password,phone,diseases,certificate,experience,role,clinic_id,checkin_time,checkout_time,weekend_available,dob,gender,city) VALUES('$name','$username','$email','$pwd','$phone','$diseases','$certificate','$experience','$user_type','1','$checkin_time','$checkout_time','$weekend','$dob','$gender','$city')");
                     if ($insertQ) {
                         $response = '<h6 class="text-center alert alert-success">' . $user_type_ . ' registered successfully.</h6>
                 <script>
@@ -284,6 +285,7 @@ function edit_user($POST)
     $checkin_time = null;
     $checkout_time = null;
     $weekend = 'no';
+    $redirect = '';
 
     $old_owd = $POST['old_pwd'];
     $password =  $POST['password'];
@@ -294,6 +296,7 @@ function edit_user($POST)
     $phone =  $POST['phone'];
     $dob =  $POST['dob'];
     $gender =  $POST['gender'];
+    $city =  $POST['city'];
     $user_type_ = $POST['user_role'];
 
 
@@ -306,11 +309,13 @@ function edit_user($POST)
 
     if ($user_type_ == 'patient') {
         $diseases = $POST['diseases'];
-        $upd_Q = $db->query("UPDATE `users` SET `name`='$name', `email`='$email', `password`='$pwd', `phone`='$phone', `diseases`='$diseases', `dob`='$dob', `gender`='$gender' WHERE `id`='$user_id'");
+        $upd_Q = $db->query("UPDATE `users` SET `name`='$name', `email`='$email', `password`='$pwd', `phone`='$phone', `diseases`='$diseases', `dob`='$dob', `gender`='$gender', `city`='$city' WHERE `id`='$user_id'");
+        $redirect = './dashboard.php';
     } else {
         $certificate = $POST['certificate'];
         $experience = $POST['experience'];
-        $upd_Q = $db->query("UPDATE `users` SET `name`='$name', `email`='$email', `password`='$pwd', `phone`='$phone', `dob`='$dob', `gender`='$gender', `certificate`='$certificate', `experience`='$experience' WHERE `id`='$user_id'");
+        $upd_Q = $db->query("UPDATE `users` SET `name`='$name', `email`='$email', `password`='$pwd', `phone`='$phone', `dob`='$dob', `gender`='$gender', `city`='$city', `certificate`='$certificate', `experience`='$experience' WHERE `id`='$user_id'");
+        $redirect = './doctorDashboard.php';
     }
 
 
@@ -318,7 +323,7 @@ function edit_user($POST)
         echo '<h6 class="text-center alert alert-success">' . $user_type_ . ' has been updated successfully.</h6>
         <script>
         setTimeout(function(){
-            window.location.href = "./adminDashboard.php";
+            window.location.href = "' . $redirect . '";
         }, 1800);
         </script>
         ';

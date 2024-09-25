@@ -410,6 +410,21 @@ body.clinic_page .render_list .box .avatar {
   overflow: hidden;
   border-radius: 50%;
 }
+body .owl-carousel .owl-nav button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+body .owl-carousel .owl-nav button span {
+  font-size: 60px;
+  color: var(--dark-blue);
+}
+body .owl-carousel .owl-nav button.owl-prev {
+  left: -40px;
+}
+body .owl-carousel .owl-nav button.owl-next {
+  right: -40px;
+}
 
 @keyframes text_reval {
   from {

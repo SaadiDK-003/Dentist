@@ -78,6 +78,12 @@ if (isLoggedin() === false) {
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-12 col-md-6 mb-3">
+                                            <div class="form-group">
+                                                <label for="city">City</label>
+                                                <input type="text" name="city" value="<?= isset($_POST['dob']) ? $_POST['dob'] : $edit_data->city ?>" id="city" class="form-control" required>
+                                            </div>
+                                        </div>
                                         <?php if ($clinic__ID != '' || $role_check == 'doctor'): ?>
                                             <div class="col-12 col-md-6 mb-3">
                                                 <div class="form-group">

@@ -16,7 +16,7 @@
             <div class="col-7 content-center">
                 <ul class="navigation list-unstyled d-flex gap-5">
                     <li><a href="./">Home</a></li>
-                    <li><a href="./about.php">About</a></li>
+                    <li><a href="./search.php">Search</a></li>
                     <li><a href="./services.php">Services</a></li>
                     <li><a href="./doctors.php">The Doctors</a></li>
                     <!-- <li><a href="./callus.php">Call Us</a></li> -->

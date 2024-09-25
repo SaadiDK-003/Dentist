@@ -58,7 +58,7 @@ require_once 'core/database.php';
                             <!-- Text Box -->
 
                             <select class="form-select mb-3" name="specialist" id="specialist" required>
-                                <option value="" selected hidden>Select City</option>
+                                <option value="" selected hidden>Select Specialist</option>
                                 <?php $get_services_Q = $db->query("SELECT * FROM `services`");
                                 while ($get_services = mysqli_fetch_object($get_services_Q)):
                                 ?>

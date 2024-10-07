@@ -11,9 +11,6 @@ if (isset($_POST['docID'])) :
         <div class="item">
             <div class="text"><span class="d-block fw-bold">Doctor Name</span><?= $doc_data->name ?></div>
             <div class="text"><span class="d-block fw-bold">Doctor Phone</span><?= $doc_data->phone ?></div>
-            <div class="text">
-                <a class="btn btn-primary btn-sm" href="./cafe_review.php?cafe_id=<?= $docID ?>&cafe_name=<?= $doc_data->clinic_name ?>" target="_blank">Reviews</a>
-            </div>
         </div>
         <div class="item">
             <div class="text"><span class="d-block fw-bold">Certificate</span><?= $doc_data->certificate ?></div>
